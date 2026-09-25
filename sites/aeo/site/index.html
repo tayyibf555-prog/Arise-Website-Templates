@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kestrel Search · Answer Engine Optimisation</title>
+  <meta name="description" content="We make your brand the answer ChatGPT, Perplexity and Google AI recommend." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/theme.css" />
+  <style>
+    /* Hero */
+    .hero {
+      /* Bottom strip is empty space that melts into the white page instead of a hard edge */
+      --fade: clamp(140px, 16vw, 230px);
+      padding-bottom: var(--fade);
+      -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - var(--fade)), rgba(0, 0, 0, 0.5) calc(100% - var(--fade) * 0.45), transparent);
+      mask-image: linear-gradient(to bottom, #000 calc(100% - var(--fade)), rgba(0, 0, 0, 0.5) calc(100% - var(--fade) * 0.45), transparent);
+    }
+    .hero-body { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 40px; align-items: end; padding-top: clamp(80px, 14vh, 170px); }
+    .hero .h1 { margin-top: 22px; font-size: clamp(36px, 4.4vw, 64px); }
+    .hero .small { max-width: 52ch; margin: 30px 0 0; }
+    .hero-side { display: flex; flex-direction: column; align-items: flex-end; gap: 22px; }
+    .hero-cards { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 10px; width: min(100%, 520px); }
+    .hero .logos { margin-top: clamp(64px, 9vw, 110px); }
+
+    /* Section heads: tiny label left, heading right */
+    section.sec { padding: clamp(72px, 9vw, 128px) 0 0; }
+    .sec-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; margin-bottom: clamp(36px, 5vw, 64px); }
+    .sec-head .h2 { max-width: 17ch; }
+
+    /* About */
+    .about .statement { max-width: 26ch; }
+    .about .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: clamp(40px, 5vw, 64px); max-width: 620px; }
+    .about .cols p { margin: 0; }
+
+    /* Services */
+    .svc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .svc { display: flex; flex-direction: column; min-height: 300px; padding: 20px; background: var(--soft); border-radius: 2px; transition: background 0.3s, color 0.3s; }
+    .svc .n { font-size: 11px; color: var(--grey); }
+    .svc h3 { margin: 16px 0 10px; font-weight: 500; font-size: 20px; letter-spacing: -0.03em; line-height: 1.15; }
+    .svc p { margin: 0; font-size: 13px; color: #5d5d63; line-height: 1.5; }
+    .svc .m { margin-top: auto; padding-top: 24px; font-size: 28px; font-weight: 500; letter-spacing: -0.04em; }
+    .svc .m small { display: block; font-size: 11.5px; letter-spacing: 0; font-weight: 400; color: var(--grey); }
+    .svc:hover { background: #111; color: #fff; }
+    .svc:hover p, .svc:hover .m small, .svc:hover .n { color: rgba(255, 255, 255, 0.6); }
+
+    /* Testimonials + pricing spacing */
+    section.sec.pricing { padding-bottom: clamp(170px, 18vw, 260px); }
+
+    @media (max-width: 1000px) {
+      .hero .h1 br { display: none; }
+      .hero-body { grid-template-columns: 1fr; }
+      .hero-side { align-items: flex-start; }
+      .svc-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .hero-cards { grid-template-columns: 1fr; }
+      .sec-head { flex-direction: column; gap: 14px; }
+      .about .cols, .svc-grid { grid-template-columns: 1fr; }
+      .svc { min-height: 0; }
+    }
+  </style>
+</head>
+<body data-email="hello@kestrelsearch.co">
+
+  <!-- ============================== HERO ============================== -->
+  <header class="dark hero">
+    <div class="ridges"><canvas data-colors="#030304,#2a2a2e,#9a9aa2,#ffffff" data-seed="2" data-scale="1.5" data-angle="2.3" data-waves="15" data-relief="0.25" data-speed="0.06"></canvas></div>
+
+    <nav class="wrap nav" aria-label="Main">
+      <a class="brand" href="#">Kestrel Search</a>
+      <div class="nav-cols">
+        <div><a href="#">Home</a><a href="#about">About</a><a href="#services">Service</a></div>
+        <div><a href="#voices">Work</a><a href="#">Insights</a><a href="#">Blog</a></div>
+        <div><a href="#contact">Contact</a><a href="#pricing">FAQs</a></div>
+      </div>
+      <a class="btn" href="#contact" data-magnetic>Book a Call <span class="sq"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+    </nav>
+
+    <div class="wrap hero-body">
+      <div>
+        <div class="trust rise" style="--rd:.1s">
+          <div class="faces" aria-hidden="true"><span>AM</span><span>JT</span><span>RK</span></div>
+          <span>Trusted by ambitious teams<br />building what comes next</span>
+        </div>
+        <h1 class="h1 rise" style="--rd:.2s">Helping Brands<br />Get Cited By<br /><span data-rotate="ChatGPT, Claude, Gemini, Perplexity">ChatGPT</span></h1>
+        <p class="small rise" style="--rd:.32s">From entity strategy and structured content to digital PR and AI visibility tracking, we make your brand the answer AI assistants recommend when buyers ask.</p>
+      </div>
+      <div class="hero-side rise" style="--rd:.45s">
+        <span class="tiny">London · 2026</span>
+        <div class="hero-cards" data-parallax="-0.25">
+          <div class="answer" aria-label="Example AI answer citing your brand">
+            <div class="q"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>Best payroll software for UK startups?</div>
+            <div class="who"><i></i>AI answer</div>
+            <p>Top picks for early-stage teams:</p>
+            <ol>
+              <li><mark>Your Brand</mark> simple setup, built for teams under 50 <span class="cite">1</span></li>
+              <li>Alternative A <span class="cite">2</span></li>
+              <li>Alternative B <span class="cite">3</span></li>
+            </ol>
+            <div class="sources"><span class="me">yourbrand.com</span><span>g2.com</span><span>reddit.com</span></div>
+          </div>
+          <div class="score" aria-label="AI visibility score">
+            <div class="top"><span>AI visibility</span><span>30 days</span></div>
+            <b>68%<small>+41%</small></b>
+            <svg class="spark" viewBox="0 0 200 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 50 L25 46 L50 48 L75 38 L100 34 L125 26 L150 22 L175 12 L200 6" fill="none" stroke="#111" stroke-width="1.6"/><path d="M0 50 L25 46 L50 48 L75 38 L100 34 L125 26 L150 22 L175 12 L200 6 V56 H0Z" fill="#111" opacity=".06"/></svg>
+            <div class="engines"><span>ChatGPT</span><span>72%</span><span>Perplexity</span><span>64%</span><span>AI Overviews</span><span>71%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap logos rise" style="--rd:.6s">
+      <span class="tiny">Trusted by</span>
+      <div class="marquee">
+        <div class="marquee-track">
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg>Fieldwork</span>
+          <span><svg viewBox="0 0 24 24"><path d="M4 4h5v16H4zM15 4h5v16h-5z"/></svg>PARALLEL</span>
+          <span><svg viewBox="0 0 24 24"><path d="M12 3 21 20H3z"/></svg>lumen</span>
+          <span><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10Z"/></svg>Orbit</span>
+          <span><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/></svg>Kinetic</span>
+          <span><svg viewBox="0 0 24 24"><path d="M12 2 22 12 12 22 2 12z"/></svg>Northwind</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================== ABOUT ============================== -->
+    <section class="sec about" id="about">
+      <div class="wrap row">
+        <span class="tiny" data-reveal>About Kestrel Search</span>
+        <div>
+          <p class="statement" data-split>We help startups, growing companies and established brands show up where buyers now ask their questions <span class="fade">inside AI answers, through clear positioning, structured content and visibility you can measure.</span></p>
+          <div class="cols" data-reveal style="--rd:.1s">
+            <p class="small">Our work connects brand, content, PR and technical SEO into one visibility system, so AI models understand exactly who you are, what you do and who you're best for.</p>
+            <p class="small">We track how often you're named across ChatGPT, Perplexity, Gemini and Google AI Overviews every week, then double down on the pages and mentions that move the number.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== SERVICES ============================== -->
+    <section class="sec" id="services">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <span class="tiny">What We Do</span>
+          <h2 class="h2" data-split>Four Levers That Decide Whether AI Recommends You.</h2>
+        </div>
+        <div class="svc-grid" data-stagger>
+          <article class="svc"><span class="n">01</span><h3>AI Visibility Audit</h3><p>We test hundreds of buyer prompts across every major assistant to see where you appear, where competitors win and why.</p><div class="m"><span data-count>300+</span><small>prompts tested per audit</small></div></article>
+          <article class="svc"><span class="n">02</span><h3>Entity and Positioning</h3><p>A clear, consistent story about who you serve, published everywhere models learn from, from your site to Wikidata.</p><div class="m"><span data-count>1</span><small>message, everywhere</small></div></article>
+          <article class="svc"><span class="n">03</span><h3>Answer-Ready Content</h3><p>Comparison pages, FAQs and data-backed guides structured so AI can quote them word for word, with schema throughout.</p><div class="m"><span data-count>3.1x</span><small>more citations on average</small></div></article>
+          <article class="svc"><span class="n">04</span><h3>Digital PR and Mentions</h3><p>Placements on the reviews, lists, forums and publications AI assistants trust most when they build an answer.</p><div class="m"><span data-count>40+</span><small>earned mentions a quarter</small></div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== TESTIMONIALS ============================== -->
+    <section class="sec voices" id="voices">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <span class="tiny">Client Perspectives</span>
+          <h2 class="h2" data-split>Trusted for the Thinking Behind the Work.</h2>
+        </div>
+        <div class="voices-grid" data-carousel data-reveal>
+          <div>
+            <div class="voice-top"><span class="qm" aria-hidden="true">“</span><span data-who>— Franklin</span></div>
+            <div class="trust on-light" style="margin-top:14px">
+              <div class="faces" aria-hidden="true"><span>AM</span><span>JT</span><span>RK</span></div>
+              <span>Trusted by ambitious teams<br />building what comes next</span>
+            </div>
+            <div class="slides" aria-live="polite">
+              <div class="slide on" data-name="Franklin"><blockquote>“Kestrel turned a complex offering into a brand AI actually understands. Within a quarter, ChatGPT went from never mentioning us to recommending us first for our core category.”</blockquote></div>
+              <div class="slide" data-name="Amara"><blockquote>“Half our inbound demos now say they found us through an AI assistant. Kestrel's weekly visibility report is the first marketing metric our board actually asks about.”</blockquote></div>
+              <div class="slide" data-name="Jonah"><blockquote>“They rewrote how we describe ourselves online, and the answers changed. Perplexity now cites our comparison pages over a review site that used to outrank us.”</blockquote></div>
+            </div>
+            <div class="voice-foot">
+              <span class="count"></span>
+              <div class="arrows">
+                <button type="button" data-prev aria-label="Previous"><svg viewBox="0 0 16 16"><path d="M13 8H3m4-4L3 8l4 4"/></svg></button>
+                <button type="button" data-next aria-label="Next"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <div class="portraits" aria-hidden="true">
+            <div class="portrait on"><svg viewBox="0 0 200 200"><circle cx="100" cy="70" r="38"/><path d="M20 200c4-50 38-78 80-78s76 28 80 78z"/></svg><em>Franklin, Founder</em></div>
+            <div class="portrait" style="background:linear-gradient(160deg,#dedee2,#a9a9b0)"><svg viewBox="0 0 200 200"><circle cx="100" cy="72" r="36"/><path d="M24 200c4-48 36-76 76-76s72 28 76 76z"/></svg><em>Amara, CMO</em></div>
+            <div class="portrait" style="background:linear-gradient(160deg,#ececef,#c5c5ca)"><svg viewBox="0 0 200 200"><circle cx="100" cy="68" r="40"/><path d="M16 200c4-52 40-80 84-80s80 28 84 80z"/></svg><em>Jonah, Head of Growth</em></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== PRICING ============================== -->
+    <section class="sec pricing" id="pricing">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <span class="tiny">Ways to Work Together</span>
+          <h2 class="h2" data-split>Flexible Engagements Built Around Your Next Stage of Growth.</h2>
+        </div>
+        <div class="plans" data-stagger>
+          <article class="plan">
+            <h3>Visibility Foundation</h3>
+            <p>For brands that need to know where they stand before investing in growth.</p>
+            <ul>
+              <li>AI visibility audit across 4 assistants</li>
+              <li>Competitor citation analysis</li>
+              <li>Entity and positioning clean-up</li>
+              <li>Schema and technical fixes</li>
+              <li>Prioritised content roadmap</li>
+              <li>Final strategy presentation</li>
+            </ul>
+            <div class="price">£3,500<small>/month</small></div>
+            <a class="btn bar" href="#contact">Build Your Foundation <span class="sq"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+          </article>
+          <article class="plan feature">
+            <canvas data-silk="iris" data-seed="7" data-scale="1.2" data-angle="-0.8" data-waves="4"></canvas>
+            <h3>Growth Partnership</h3>
+            <p>For growing brands that want to be the default answer in their category.</p>
+            <ul>
+              <li>Everything in Visibility Foundation</li>
+              <li>4 answer-ready pages a month</li>
+              <li>Digital PR and review placements</li>
+              <li>Community and forum presence</li>
+              <li>Weekly AI visibility tracking</li>
+              <li>Monthly performance reporting</li>
+              <li>Fortnightly strategy sessions</li>
+            </ul>
+            <div class="price">£6,500<small>/month</small></div>
+            <a class="btn bar" href="#contact">Start Growing <span class="sq"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+          </article>
+          <article class="plan">
+            <h3>Category Leadership</h3>
+            <p>For established brands managing several products, markets and regions.</p>
+            <ul>
+              <li>Everything in Growth Partnership</li>
+              <li>Multi-market and multi-language</li>
+              <li>Original research and data studies</li>
+              <li>Executive thought leadership</li>
+              <li>Conversion tracking from AI traffic</li>
+              <li>Dedicated strategist</li>
+              <li>6-month visibility guarantee</li>
+            </ul>
+            <div class="price">£9,500<small>/month</small></div>
+            <a class="btn bar" href="#contact">Discuss Your Goal <span class="sq"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer class="dark curve-top footer" id="contact">
+    <div class="ridges"><canvas data-colors="#030304,#2a2a2e,#9a9aa2,#ffffff" data-seed="6" data-scale="1.5" data-angle="2.4" data-waves="14" data-relief="0.25" data-speed="0.06"></canvas></div>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div><h4>Navigate</h4><ul><li><a href="#">Home</a></li><li><a href="#services">Service</a></li><li><a href="#voices">Work</a></li><li><a href="#about">About</a></li><li><a href="#">Insights</a></li></ul></div>
+        <div><h4>Service</h4><ul><li><a href="#services">AI Visibility Audit</a></li><li><a href="#services">Entity Strategy</a></li><li><a href="#services">Answer-Ready Content</a></li><li><a href="#services">Digital PR</a></li><li><a href="#services">Tracking and Reporting</a></li></ul></div>
+        <div><h4>Social Media</h4><ul><li><a href="#">LinkedIn</a></li><li><a href="#">X</a></li><li><a href="#">Instagram</a></li><li><a href="#">YouTube</a></li><li><a href="#">Threads</a></li></ul></div>
+        <div class="foot-mail"><h4 class="tiny" style="margin:0 0 10px">Get in Touch</h4><a href="mailto:hello@kestrelsearch.co">hello@kestrelsearch.co</a></div>
+      </div>
+      <div class="foot-base">
+        <span>Monday to Friday<br />09:00 to 17:30</span>
+        <span>Unit 4, Shoreditch Works<br />London EC2A</span>
+        <span>hello@kestrelsearch.co<br />+44 (0)20 0000 0000</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../_shared/silk.js"></script>
+  <script src="../../_shared/vendor/gsap/gsap.min.js"></script>
+  <script src="../../_shared/vendor/gsap/ScrollTrigger.min.js"></script>
+  <script src="../../_shared/vendor/gsap/SplitText.min.js"></script>
+  <script src="../../_shared/motion.js"></script>
+  <script src="../assets/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Halden Studio · A website that books calls, live in 14 days</title>
+  <meta name="description" content="Watch the 9-minute breakdown of how Halden Studio uses AI to research, write, design and build conversion-first websites in 14 days." />
+  <meta name="theme-color" content="#0c0303" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/theme.css" />
+  <script src="../../_shared/vendor/gsap/gsap.min.js"></script>
+  <script src="../../_shared/vendor/gsap/ScrollTrigger.min.js"></script>
+  <script src="../../_shared/vendor/gsap/SplitText.min.js"></script>
+  <script>
+    document.documentElement.classList.add('js');
+    if (window.gsap && window.SplitText && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('gs');
+  </script>
+  <style>
+    /* ---------------- Hero ---------------- */
+    .vhero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      /* Half the player hangs below the hero: player height / 2 = min(920px, width - gutters) * 0.28125 */
+      padding-bottom: calc(min(920px, 100% - 2 * var(--pad)) * 0.28125 + clamp(24px, 2.2vw, 30px));
+      color: #fff;
+      text-align: center;
+      /* Melt the dark hero into the white page behind the player instead of a hard edge.
+         --fade matches the bottom padding (the strip behind the player's top half), so text is never faded. */
+      --fade: calc(min(920px, 100vw - 2 * var(--pad)) * 0.28125 + clamp(24px, 2.2vw, 30px));
+      -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - var(--fade)), rgba(0, 0, 0, 0.5) calc(100% - var(--fade) * 0.45), transparent);
+      mask-image: linear-gradient(to bottom, #000 calc(100% - var(--fade)), rgba(0, 0, 0, 0.5) calc(100% - var(--fade) * 0.45), transparent);
+    }
+    .vhero > .silk { z-index: -2; }
+    .vhero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(60% 55% at 50% 38%, rgba(8, 0, 0, 0.55), rgba(8, 0, 0, 0) 75%),
+        linear-gradient(180deg, rgba(8, 0, 0, 0.5) 0%, rgba(8, 0, 0, 0) 25%);
+    }
+    .vnav {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+      padding: 18px var(--pad) 0;
+      text-align: left;
+    }
+    .vnav .hero-brand { padding-top: 0; }
+    .vnav .btn-talk { justify-self: end; }
+    .slots { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.9; }
+    .live { position: relative; flex: none; width: 7px; height: 7px; border-radius: 50%; background: #ff6a5c; }
+    .live::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid currentColor; color: #ff6a5c; animation: ping 2s var(--ease) infinite; }
+    @keyframes ping { from { transform: scale(0.5); opacity: 1; } to { transform: scale(1.8); opacity: 0; } }
+
+    .vhead { padding-top: clamp(32px, 4.4vh, 50px); }
+    .vtitle {
+      margin: 18px auto 0;
+      max-width: 13em;
+      font-size: clamp(38px, 5vw, 72px);
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      text-wrap: balance;
+    }
+    .vsub { max-width: 54ch; margin: 18px auto 0; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.55; letter-spacing: -0.01em; color: rgba(255, 255, 255, 0.72); }
+
+    /* ---------------- Player ---------------- */
+    .vsl { position: relative; width: 100%; max-width: 920px; margin: calc(min(920px, 100%) * -0.28125) auto 0; }
+    .vsl-screen {
+      position: relative;
+      isolation: isolate;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 4px;
+      color: #fff;
+      box-shadow: 0 50px 100px -40px rgba(40, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+    .vsl-screen .silk { z-index: -2; }
+    .vsl-screen::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.35) 70%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.6), transparent 40%);
+      pointer-events: none;
+    }
+    .vsl-screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .vsl-play { position: absolute; inset: 0; display: grid; place-items: center; width: 100%; border: 0; background: none; }
+    .play-btn {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: clamp(64px, 8vw, 96px);
+      height: clamp(64px, 8vw, 96px);
+      border-radius: 50%;
+      background: #fff;
+      color: var(--red);
+      transition: transform 0.5s var(--ease);
+    }
+    .play-btn svg { width: 28%; height: 28%; margin-left: 7%; fill: currentColor; }
+    .play-btn::before, .play-btn::after { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.75); animation: ring 2.6s var(--ease) infinite; }
+    .play-btn::after { animation-delay: 1.3s; }
+    @keyframes ring { from { transform: scale(1); opacity: 0.9; } to { transform: scale(1.9); opacity: 0; } }
+    .vsl-play:hover .play-btn { transform: scale(1.08); }
+    .vchip {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 10px;
+      border-radius: 2px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 12px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      pointer-events: none;
+    }
+    .vchip svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .vchip.sound { top: 14px; left: 14px; }
+    .vchip.time { right: 14px; bottom: 22px; font-family: var(--mono); font-size: 11px; font-variant-numeric: tabular-nums; }
+    .vchip.tag { top: 14px; right: 14px; }
+    .vsl-caption { position: absolute; left: 22px; bottom: 24px; max-width: 58%; text-align: left; font-size: clamp(16px, 1.8vw, 26px); font-weight: 500; line-height: 1.15; letter-spacing: -0.04em; pointer-events: none; }
+    .vsl-caption small { display: block; margin-bottom: 8px; font-family: var(--mono); font-size: 10.5px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.75; }
+    .vsl-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255, 255, 255, 0.18); pointer-events: none; }
+    .vsl-bar::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3%; background: #ff6a5c; }
+    .vsl.playing .vchip, .vsl.playing .vsl-caption, .vsl.playing .vsl-bar { display: none; }
+
+    .vcta { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: clamp(32px, 4vw, 48px); text-align: center; }
+    .micro { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 0; margin: 0; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+    .micro span + span::before { content: '·'; margin: 0 8px; opacity: 0.5; }
+    .fcta .micro { justify-content: flex-start; }
+    .proof { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+    .faces { display: flex; }
+    .faces span {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      margin-left: -8px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .faces span:first-child { margin-left: 0; }
+    .proof p { margin: 0; text-align: left; font-size: 12.5px; line-height: 1.35; color: #3a3535; letter-spacing: -0.01em; }
+    .proof .stars svg { width: 10px; height: 10px; }
+
+    /* ---------------- Problem ---------------- */
+    .partners { padding-top: clamp(72px, 8vw, 110px); }
+    .partners-label { justify-content: center; }
+    .symptoms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 32px; max-width: 980px; margin: clamp(44px, 5vw, 64px) auto 0; text-align: left; }
+    .symptoms div { padding-top: 18px; border-top: 1px solid var(--line); }
+    .symptoms b { display: block; font-size: clamp(34px, 3.4vw, 50px); font-weight: 500; letter-spacing: -0.05em; line-height: 1; color: var(--red); }
+    .symptoms span { display: block; margin-top: 12px; font-size: 14px; line-height: 1.45; color: var(--muted); letter-spacing: -0.01em; }
+
+    /* ---------------- Included ---------------- */
+    .included .svc-row { grid-template-columns: 72px minmax(0, 1.15fr) minmax(0, 1fr) 110px; }
+    .svc-row .when { justify-self: end; padding: 7px 10px; border: 1px solid var(--line-2); border-radius: 2px; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; transition: background 0.3s var(--ease), color 0.3s, border-color 0.3s; }
+    .svc-row:hover .when { background: var(--red); border-color: var(--red); color: #fff; }
+    .svc-row.static { cursor: default; }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px 40px;
+      flex-wrap: wrap;
+      margin-top: clamp(28px, 3vw, 40px);
+      padding: clamp(20px, 2.4vw, 28px);
+      background: var(--card);
+      border-radius: 2px;
+    }
+    .price-row p { margin: 0; font-size: clamp(20px, 2vw, 28px); font-weight: 500; letter-spacing: -0.04em; line-height: 1.2; }
+    .price-row p small { display: block; margin-top: 6px; font-size: 14px; font-weight: 400; letter-spacing: -0.01em; color: var(--muted); }
+
+    /* ---------------- Process (journey card) ---------------- */
+    .jdetail {
+      display: flex;
+      gap: 14px;
+      align-items: baseline;
+      min-height: 64px;
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      font-size: 14px;
+      line-height: 1.5;
+      color: #2d2828;
+      letter-spacing: -0.01em;
+    }
+    .jdetail.swap { animation: swapIn 0.6s var(--ease) both; }
+    @keyframes swapIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .process .story-side p.lede { max-width: 46ch; margin: 18px 0 0; color: var(--muted); }
+
+    /* ---------------- Guarantee ---------------- */
+    .guarantee { padding: 0 0 clamp(90px, 10vw, 140px); }
+    .g-card {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(28px, 5vw, 72px);
+      padding: clamp(28px, 4.5vw, 64px);
+      background: var(--card);
+      border-radius: 3px;
+    }
+    .seal { position: relative; width: clamp(128px, 13vw, 176px); aspect-ratio: 1; }
+    .seal .ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 24s linear infinite; }
+    .seal .ring text { font-family: var(--mono); font-size: 9.6px; letter-spacing: 0.18em; text-transform: uppercase; fill: var(--ink); }
+    .seal .core { position: absolute; inset: 22%; display: grid; place-items: center; border-radius: 50%; background: var(--red); color: #fff; text-align: center; }
+    .seal .core b { display: block; font-size: clamp(28px, 3vw, 40px); font-weight: 500; letter-spacing: -0.05em; line-height: 0.9; }
+    .seal .core small { display: block; margin-top: 4px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .g-card .h2 { margin-top: 18px; max-width: 15em; font-size: clamp(28px, 3.4vw, 48px); }
+    .g-card p { max-width: 58ch; margin: 18px 0 0; color: #3a3535; font-size: 15.5px; line-height: 1.6; letter-spacing: -0.01em; }
+
+    /* ---------------- FAQ ---------------- */
+    .faq { padding: 0 0 clamp(90px, 10vw, 140px); }
+    .faq-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 96px); }
+    .faq-grid .h2 { margin-top: 18px; }
+    .faq-grid aside p { margin: 18px 0 0; max-width: 32ch; color: var(--muted); font-size: 15px; }
+    .faq-grid aside a { color: var(--red); border-bottom: 1px solid currentColor; }
+    .faq-list details { border-top: 1px solid var(--line); }
+    .faq-list details:last-child { border-bottom: 1px solid var(--line); }
+    .faq-list summary {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr) 32px;
+      align-items: center;
+      gap: 12px;
+      padding: 22px 0;
+      list-style: none;
+      cursor: pointer;
+      font-size: clamp(17px, 1.5vw, 20px);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.3;
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary .n { font-family: var(--mono); font-size: 10.5px; font-weight: 400; letter-spacing: 0.06em; color: var(--red); }
+    .faq-list summary i {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--line-2);
+      border-radius: 2px;
+      transition: background 0.3s var(--ease), border-color 0.3s, transform 0.4s var(--ease);
+    }
+    .faq-list summary i::before, .faq-list summary i::after { content: ''; position: absolute; left: 50%; top: 50%; width: 11px; height: 1.5px; background: currentColor; transform: translate(-50%, -50%); }
+    .faq-list summary i::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform 0.4s var(--ease); }
+    .faq-list summary:hover i { border-color: var(--ink); }
+    .faq-list details[open] summary i { background: var(--red); border-color: var(--red); color: #fff; }
+    .faq-list details[open] summary i::after { transform: translate(-50%, -50%) rotate(0deg); }
+    .faq-list details p { margin: -6px 0 24px 56px; max-width: 60ch; color: var(--muted); font-size: 15px; line-height: 1.6; letter-spacing: -0.01em; }
+
+    /* ---------------- Final CTA in the footer card ---------------- */
+    .fcta .h2 { margin-top: 18px; max-width: 12em; }
+    .fcta .lede { max-width: 50ch; margin: 18px 0 0; color: var(--muted); }
+    .fcta .btn { margin-top: 28px; }
+    .fcta .micro { margin-top: 16px; }
+    .footer .fmark { margin-top: clamp(56px, 8vw, 130px); }
+
+    /* ---------------- Sticky CTA bar ---------------- */
+    .sticky-cta {
+      position: fixed;
+      left: 50%;
+      bottom: 14px;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      width: min(760px, calc(100% - 24px));
+      padding: 8px 8px 8px 20px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 24px 50px -18px rgba(30, 0, 0, 0.45), 0 0 0 1px rgba(17, 17, 17, 0.08);
+      transform: translate(-50%, 150%);
+      transition: transform 0.6s var(--ease);
+    }
+    .sticky-cta.show { transform: translate(-50%, 0); }
+    .sticky-cta p { display: flex; align-items: center; gap: 12px; margin: 0; min-width: 0; font-size: 14px; letter-spacing: -0.015em; }
+    .sticky-cta p span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sticky-cta .live, .sticky-cta .live::after { background: var(--red); color: var(--red); }
+    .sticky-cta .live::after { background: none; }
+    .sticky-cta .btn { height: 44px; }
+
+    @media (max-width: 960px) {
+      .faq-grid { grid-template-columns: 1fr; }
+      .included .svc-row { grid-template-columns: 48px minmax(0, 1fr) auto; }
+    }
+    @media (max-width: 640px) {
+      .vnav { grid-template-columns: 1fr auto; }
+      .slots { display: none; }
+      .vsl-caption, .vchip.time { display: none; }
+      .vchip.sound { top: 10px; left: 10px; font-size: 11px; }
+      .btn.lg { height: 54px; padding: 0 12px 0 18px; font-size: 14px; gap: 14px; }
+      .symptoms { grid-template-columns: 1fr; }
+      .included .svc-row { grid-template-columns: 34px minmax(0, 1fr) auto; }
+      .g-card { grid-template-columns: 1fr; }
+      .faq-list summary { grid-template-columns: 30px minmax(0, 1fr) 32px; }
+      .faq-list details p { margin-left: 42px; }
+      .sticky-cta { padding-left: 14px; }
+      .sticky-cta p { font-size: 13px; }
+      .sticky-cta .hide-sm { display: none; }
+    }
+  </style>
+</head>
+<body data-booking-url="">
+
+  <!-- ============================== HERO ============================== -->
+  <header class="vhero dark-fallback" id="top">
+    <canvas class="silk silk-fade" data-silk="crimson" data-seed="4" data-scale="1.6" data-angle="-1.0" data-waves="3.2" aria-hidden="true"></canvas>
+    <nav class="vnav" aria-label="Main">
+      <a class="hero-brand rise" style="--rd:.1s" href="#top">© Halden Studio</a>
+      <span class="slots rise" style="--rd:.2s"><i class="live" aria-hidden="true"></i>2 build slots left this month</span>
+      <a class="btn-talk rise" style="--rd:.3s" href="#book">Book a Call</a>
+    </nav>
+
+    <div class="vhead wrap">
+      <span class="eyebrow light rise" style="--rd:.2s">Free 9-minute breakdown</span>
+      <h1 class="vtitle" data-split="load" data-delay="0.25">A website that books calls, live in 14 days.</h1>
+      <p class="vsub rise" style="--rd:.5s">Watch how we use AI to research, write and design conversion-first websites in two weeks, and why they outsell sites other agencies spent three months on.</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================== VSL PLAYER + CTA ============================== -->
+    <section class="vsl-zone" aria-label="Video">
+      <div class="wrap">
+        <div class="vsl rise" style="--rd:.6s" data-vsl data-embed="">
+          <div class="vsl-screen bronze-fallback">
+            <canvas class="silk" data-silk="bronze" data-seed="2" data-scale="1.6" data-angle="1.5" data-waves="5" aria-hidden="true"></canvas>
+            <span class="vchip sound"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6v4h2.5l3.5 3V3L5 6H2.5Z" /><path d="M11 5.5a3.5 3.5 0 0 1 0 5M12.8 3.8a6 6 0 0 1 0 8.4" /></svg>Click to watch with sound</span>
+            <span class="vchip tag">Free training</span>
+            <div class="vsl-caption"><small>Chapter 01 · The 14-day system</small>How we ship websites that sell in two weeks, not three months</div>
+            <span class="vchip time">09:14</span>
+            <span class="vsl-bar"></span>
+            <button class="vsl-play" type="button" aria-label="Play video">
+              <span class="play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17l14-8.5L6 3.5Z" /></svg></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="vcta">
+          <a class="btn lg rise" style="--rd:.75s" href="#book" data-sticky-anchor>Book Your Free Website Teardown <span class="ico"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" /></svg></span></a>
+          <p class="micro rise" style="--rd:.85s"><span>20-minute call</span><span>Fixed-price quote</span><span>No obligation</span></p>
+          <div class="proof rise" style="--rd:.95s">
+            <div class="faces" aria-hidden="true">
+              <span style="background:#8b1a1a">PN</span><span style="background:#3a0c0c">JB</span><span style="background:#a0582e">OK</span><span style="background:#1c1414">EM</span>
+            </div>
+            <p>
+              <span class="stars" role="img" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 12 12"><path d="M6 .5l1.63 3.52 3.87.45-2.86 2.63.77 3.8L6 9.02 2.59 10.9l.77-3.8L.5 4.47l3.87-.45z" /></svg><svg viewBox="0 0 12 12"><path d="M6 .5l1.63 3.52 3.87.45-2.86 2.63.77 3.8L6 9.02 2.59 10.9l.77-3.8L.5 4.47l3.87-.45z" /></svg><svg viewBox="0 0 12 12"><path d="M6 .5l1.63 3.52 3.87.45-2.86 2.63.77 3.8L6 9.02 2.59 10.9l.77-3.8L.5 4.47l3.87-.45z" /></svg><svg viewBox="0 0 12 12"><path d="M6 .5l1.63 3.52 3.87.45-2.86 2.63.77 3.8L6 9.02 2.59 10.9l.77-3.8L.5 4.47l3.87-.45z" /></svg><svg viewBox="0 0 12 12"><path d="M6 .5l1.63 3.52 3.87.45-2.86 2.63.77 3.8L6 9.02 2.59 10.9l.77-3.8L.5 4.47l3.87-.45z" /></svg>
+              </span>
+              Rated 4.9/5 by 120+ business owners
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== STACK ============================== -->
+    <section class="partners" aria-label="Our stack">
+      <div class="wrap">
+        <p class="partners-label" data-reveal>Built with the stack behind the best sites on the web</p>
+        <div class="logos" data-stagger>
+          <span class="l1">Figma</span>
+          <span class="l2">Framer</span>
+          <span class="l3">Webflow</span>
+          <span class="l4">Vercel</span>
+          <span class="l5">OpenAI</span>
+          <span class="l6">cursor</span>
+          <span class="l7">supabase</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== PROBLEM ============================== -->
+    <section class="about" id="problem" aria-labelledby="problem-title">
+      <div class="wrap">
+        <span class="eyebrow" data-reveal>The problem</span>
+        <h2 class="statement" id="problem-title" data-split>Your website looks fine. That’s the problem. It takes months to change, loads slowly, and quietly loses you customers every single day.</h2>
+        <div class="about-img bronze-fallback" data-reveal style="--rd:.16s">
+          <canvas class="silk" data-silk="bronze" data-seed="6" data-scale="2.6" data-angle="1.4" data-waves="7" aria-hidden="true"></canvas>
+        </div>
+        <p class="lede" data-reveal>Most agencies still build like it’s 2015: long discovery phases, endless revision rounds and a launch date that keeps slipping. Meanwhile your competitors are shipping new pages every week.</p>
+        <div class="symptoms" data-stagger>
+          <div><b data-count>12 weeks</b><span>The typical agency timeline we hear about on teardown calls</span></div>
+          <div><b data-count>4.1s</b><span>Average mobile load time on the sites we audit</span></div>
+          <div><b data-count>1.3%</b><span>Average enquiry conversion before we rebuild</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== WHAT'S INCLUDED ============================== -->
+    <section class="services included" id="included" aria-labelledby="inc-title">
+      <div class="wrap">
+        <div class="svc-head">
+          <div>
+            <span class="eyebrow" data-reveal>What’s included</span>
+            <h2 class="h2" id="inc-title" data-split>Everything you need to launch, for one fixed price</h2>
+          </div>
+          <p data-reveal style="--rd:.1s">No hourly billing, no surprise invoices. One team takes you from blank page to live site, then stays on for the first month.</p>
+        </div>
+        <ul class="svc-list" data-stagger>
+          <li>
+            <div class="svc-row static">
+              <span class="n">(01)</span>
+              <h3>Strategy and copy</h3>
+              <div class="svc-body">
+                <p>AI-assisted research across your reviews, competitors and search data, turned into a page plan and copy that sounds like you.</p>
+              </div>
+              <span class="when">Days 1–2</span>
+            </div>
+          </li>
+          <li>
+            <div class="svc-row static">
+              <span class="n">(02)</span>
+              <h3>Custom design</h3>
+              <div class="svc-body">
+                <p>Two directions explored with AI, then refined by hand into one design system. Never a template with your logo on it.</p>
+              </div>
+              <span class="when">Days 3–6</span>
+            </div>
+          </li>
+          <li>
+            <div class="svc-row static">
+              <span class="n">(03)</span>
+              <h3>Build, SEO and tracking</h3>
+              <div class="svc-body">
+                <p>Hand-finished in Webflow, Framer or Next.js. Fast, accessible, indexed and wired up to your analytics from day one.</p>
+              </div>
+              <span class="when">Days 7–13</span>
+            </div>
+          </li>
+          <li>
+            <div class="svc-row static">
+              <span class="n">(04)</span>
+              <h3>Launch and 30-day care</h3>
+              <div class="svc-body">
+                <p>We launch, monitor, fix and fine-tune for a month, then hand over a site your team can edit without calling us.</p>
+              </div>
+              <span class="when">Day 14 +</span>
+            </div>
+          </li>
+        </ul>
+        <div class="price-row" data-reveal>
+          <p>Fixed price from £4,950<small>Everything above included. 50% to start, 50% on launch.</small></p>
+          <a class="btn" href="#book" data-magnetic>Check Availability <span class="ico"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" /></svg></span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== PROCESS ============================== -->
+    <section class="story process" id="process" aria-labelledby="process-title">
+      <div class="wrap story-grid">
+        <div class="jpanel dark-fallback" data-reveal data-journey data-cycle data-active="0">
+          <canvas class="silk" data-silk="crimson" data-seed="2" data-scale="1.2" data-angle="-0.4" data-waves="2.4" aria-hidden="true"></canvas>
+          <div class="jcard">
+            <div class="jcard-head">Launch plan · 14 days</div>
+            <div class="jcard-body">
+              <div class="jbrand">
+                <span class="jlogo" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M15.5 16.5a1.8 1.8 0 1 1 3.4.9 4.6 4.6 0 0 1-8.3-2.8 6.9 6.9 0 0 1 13.4-1.9 9.2 9.2 0 0 1-9.4 11.9" /></svg>
+                </span>
+                <div><b>© Halden Studio</b><small>Your dedicated build team</small></div>
+              </div>
+              <div class="timeline">
+                <button class="jstep" type="button" data-detail="A 60-minute kickoff call. We agree goals, pages and voice, then our AI research sprint starts that afternoon."><i></i><b>Kickoff</b><small>Day 1</small></button>
+                <button class="jstep" type="button" data-detail="Two homepage directions land in your inbox with real copy. You pick one, we refine it by hand."><i></i><b>Design</b><small>Day 3</small></button>
+                <button class="jstep" type="button" data-detail="Every page built, tested on real devices and wired to your analytics. You review on a live staging link."><i></i><b>Build</b><small>Day 7</small></button>
+                <button class="jstep" type="button" data-detail="We go live, submit to Google and watch the numbers with you for the next 30 days."><i></i><b>Launch</b><small>Day 14</small></button>
+              </div>
+              <p class="jdetail" aria-live="polite">A 60-minute kickoff call. We agree goals, pages and voice, then our AI research sprint starts that afternoon.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-side">
+          <div>
+            <span class="eyebrow" data-reveal>How it works</span>
+            <h2 class="h3" id="process-title" data-split>From kickoff call to live site in 14 days, with four check-ins along the way.</h2>
+            <p class="lede" data-reveal>AI handles research, first drafts and the busywork. Senior designers and developers make every decision that matters. You always know what’s happening and what’s next.</p>
+          </div>
+          <figure class="tcard" data-reveal style="--rd:.1s">
+            <div class="stars" role="img" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 12 12"><path d="M6 .5l1.63 3.52 3.87.45-2.86 2.63.77 3.8L6 9.02 2.59 10.9l.77-3.8L.5 4.47l3.87-.45z" /></svg>
+              <svg viewBox="0 0 12 12"><path d="M6 .5l1.63 3.52 3.87.45-2.86 2.63.77 3.8L6 9.02 2.59 10.9l.77-3.8L.5 4.47l3.87-.45z" /></svg>
+              <svg viewBox="0 0 12 12"><path d="M6 .5l1.63 3.52 3.87.45-2.86 2.63.77 3.8L6 9.02 2.59 10.9l.77-3.8L.5 4.47l3.87-.45z" /></svg>
+              <svg viewBox="0 0 12 12"><path d="M6 .5l1.63 3.52 3.87.45-2.86 2.63.77 3.8L6 9.02 2.59 10.9l.77-3.8L.5 4.47l3.87-.45z" /></svg>
+              <svg viewBox="0 0 12 12"><path d="M6 .5l1.63 3.52 3.87.45-2.86 2.63.77 3.8L6 9.02 2.59 10.9l.77-3.8L.5 4.47l3.87-.45z" /></svg>
+            </div>
+            <blockquote>“Our last agency took five months. Halden had us live in thirteen days, and the new site booked more consultations in its first fortnight than the old one did all quarter.”</blockquote>
+            <figcaption>James Bell, Managing Director at Ledgerline Accounting</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== PROOF ============================== -->
+    <section class="showcase" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <h2 class="showcase-head" id="work-title" data-split>Real results from recent launches</h2>
+        <div class="stack">
+          <a class="pcard" href="#" style="--i:0">
+            <div class="pcard-in bronze-fallback">
+              <canvas class="silk" data-silk="bronze" data-seed="3" data-scale="1.6" data-angle="1.45" data-waves="5" aria-hidden="true"></canvas>
+              <div class="chips"><span>Web Design</span><span>11 days</span></div>
+              <div class="pcard-meta">
+                <div><b>Northvale Dental</b><small>Private dental group · Leeds</small></div>
+                <div class="stat"><b data-count>+64%</b><small>Booked consultations</small></div>
+              </div>
+            </div>
+          </a>
+          <a class="pcard" href="#" style="--i:1">
+            <div class="pcard-in dark-fallback">
+              <canvas class="silk" data-silk="crimson" data-seed="7" data-scale="1.6" data-angle="-1.1" data-waves="3" aria-hidden="true"></canvas>
+              <div class="chips"><span>Landing Page</span><span>13 days</span></div>
+              <div class="pcard-meta">
+                <div><b>Ledgerline Accounting</b><small>Lead generation · Manchester</small></div>
+                <div class="stat"><b data-count>3.1×</b><small>Enquiry conversion rate</small></div>
+              </div>
+            </div>
+          </a>
+          <a class="pcard" href="#" style="--i:2">
+            <div class="pcard-in bronze-fallback">
+              <canvas class="silk" data-silk="bronze" data-seed="8" data-scale="1.4" data-angle="1.2" data-waves="4" aria-hidden="true"></canvas>
+              <div class="chips"><span>E-commerce</span><span>14 days</span></div>
+              <div class="pcard-meta">
+                <div><b>Kiln &amp; Co. Ceramics</b><small>Shopify rebuild · Bristol</small></div>
+                <div class="stat"><b data-count>£48k</b><small>First-month online sales</small></div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== GUARANTEE ============================== -->
+    <section class="guarantee" aria-labelledby="g-title">
+      <div class="wrap">
+        <div class="g-card" data-reveal>
+          <div class="seal" aria-hidden="true">
+            <svg class="ring" viewBox="0 0 160 160"><defs><path id="seal-path" d="M80 80m-66 0a66 66 0 1 1 132 0a66 66 0 1 1-132 0" /></defs><text><textPath href="#seal-path" textLength="412" lengthAdjust="spacing">Launch guarantee · Live in 14 days · Risk free · </textPath></text></svg>
+            <span class="core"><span><b>14</b><small>Days</small></span></span>
+          </div>
+          <div>
+            <span class="eyebrow">The 14-day guarantee</span>
+            <h2 class="h2" id="g-title">Live in 14 days, or the final invoice is on us.</h2>
+            <p>If your site isn’t live within 14 working days of kickoff (once we have your sign-offs), you don’t pay the second 50%. We take the risk, because the process works.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== FAQ ============================== -->
+    <section class="faq" aria-labelledby="faq-title">
+      <div class="wrap faq-grid">
+        <aside>
+          <span class="eyebrow" data-reveal>FAQ</span>
+          <h2 class="h2" id="faq-title" data-split>Questions, answered</h2>
+          <p data-reveal>Still unsure? Bring your questions to the call, or email <a href="mailto:hello@haldenstudio.co">hello@haldenstudio.co</a>.</p>
+        </aside>
+        <div class="faq-list" data-reveal style="--rd:.1s">
+          <details open>
+            <summary><span class="n">(01)</span>Is the website designed by AI?<i aria-hidden="true"></i></summary>
+            <p>AI speeds up research, first drafts and the repetitive parts of the build. Every design and every line of copy is reviewed and finished by a senior person on our team.</p>
+          </details>
+          <details>
+            <summary><span class="n">(02)</span>How much does it cost?<i aria-hidden="true"></i></summary>
+            <p>Most builds land between £4,950 and £12,000 depending on pages and integrations. You get a fixed quote on the call, and it doesn’t change.</p>
+          </details>
+          <details>
+            <summary><span class="n">(03)</span>Which platform do you build on?<i aria-hidden="true"></i></summary>
+            <p>Webflow, Framer or Next.js, whichever suits your team. We’ll recommend one on the call based on who needs to edit the site.</p>
+          </details>
+          <details>
+            <summary><span class="n">(04)</span>Do I own the website?<i aria-hidden="true"></i></summary>
+            <p>Yes. The design, code, copy and accounts are all yours from day one. No lock-in and no licence fees.</p>
+          </details>
+          <details>
+            <summary><span class="n">(05)</span>What do you need from me?<i aria-hidden="true"></i></summary>
+            <p>About two hours across the two weeks: the kickoff call, two short reviews and final sign-off. We handle everything else.</p>
+          </details>
+          <details>
+            <summary><span class="n">(06)</span>What happens after launch?<i aria-hidden="true"></i></summary>
+            <p>You get 30 days of care included. After that, most clients keep us on a monthly growth plan for new pages and testing, but there’s no obligation.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================== FINAL CTA + FOOTER ============================== -->
+  <footer class="footer dark-fallback" id="book" data-sticky-hide>
+    <canvas class="silk" data-silk="ember" data-seed="4" data-scale="1.3" data-angle="-1.0" data-waves="3.2" aria-hidden="true"></canvas>
+    <div class="fcard" data-grow>
+      <div class="ftop">
+        <div class="fcta">
+          <span class="eyebrow">2 build slots left this month</span>
+          <h2 class="h2" data-split>Ready for a website that sells?</h2>
+          <p class="lede">Book a free 20-minute teardown. We’ll show you what’s costing you enquiries and what we’d build instead, whether you work with us or not.</p>
+          <a class="btn lg" href="#" data-book data-magnetic>Book Your Free Website Teardown <span class="ico"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" /></svg></span></a>
+          <p class="micro"><span>20-minute call</span><span>Fixed-price quote</span><span>No obligation</span></p>
+        </div>
+        <nav class="flinks" aria-label="Footer">
+          <ul>
+            <li><a href="mailto:hello@haldenstudio.co">Email us</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="../site/">Our website</a></li>
+          </ul>
+          <ul>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="mark fmark" data-fit aria-hidden="true"><span>Halden Studio</span></p>
+      <div class="fbase">
+        <span>© <span data-year>2026</span> Halden Studio Ltd. All rights reserved.</span>
+        <span>London | UK</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="sticky-cta" role="region" aria-label="Book a call" inert>
+    <p><i class="live" aria-hidden="true"></i><span>Free website teardown<span class="hide-sm"> · 2 slots left this month</span></span></p>
+    <a class="btn" href="#book">Book a Call <span class="ico"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" /></svg></span></a>
+  </div>
+
+  <script src="../../_shared/motion.js"></script>
+  <script src="../../_shared/silk.js"></script>
+  <script src="../assets/theme.js"></script>
+</body>
+</html>

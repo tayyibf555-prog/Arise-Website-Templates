@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Halden Studio · Conversion-first websites, shipped in days</title>
+  <meta name="description" content="Halden Studio is an AI website agency in London. We design, write and build conversion-first websites in days, with AI in the loop and people on the craft." />
+  <meta name="theme-color" content="#0c0303" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/theme.css" />
+  <script src="../../_shared/vendor/gsap/gsap.min.js"></script>
+  <script src="../../_shared/vendor/gsap/ScrollTrigger.min.js"></script>
+  <script src="../../_shared/vendor/gsap/SplitText.min.js"></script>
+  <script>
+    document.documentElement.classList.add('js');
+    if (window.gsap && window.SplitText && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('gs');
+  </script>
+  <style>
+    /* Page-specific tweaks for the standard site */
+    .about .statement { max-width: 20em; }
+  </style>
+</head>
+<body>
+
+  <!-- ============================== HERO ============================== -->
+  <header class="hero dark-fallback" id="top">
+    <canvas class="silk silk-fade" data-silk="crimson" data-seed="4" data-scale="1.6" data-angle="-1.0" data-waves="3.2" aria-hidden="true"></canvas>
+
+    <div class="hero-top">
+      <nav class="hero-nav rise" style="--rd:.1s" aria-label="Main">
+        <ul>
+          <li><a href="#top">Home</a></li>
+          <li><a href="#about">About us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#work">Case studies</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="hero-brand rise" style="--rd:.2s" href="#top">© Halden Studio</a>
+      <a class="btn-talk rise" style="--rd:.3s" href="#contact">Let’s Talk</a>
+    </div>
+
+    <div class="hero-mid">
+      <div class="hero-tag rise" style="--rd:.45s">
+        <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M10.5 1.5 1.5 10.5M1.5 4v6.5H8" /></svg>
+        <p>Designing websites that sell, shipped in days with AI in the loop and people on the craft.</p>
+      </div>
+      <nav class="socials rise" style="--rd:.55s" aria-label="Social">
+        <a href="#" aria-label="LinkedIn">LI</a><i aria-hidden="true">/</i>
+        <a href="#" aria-label="Behance">BE</a><i aria-hidden="true">/</i>
+        <a href="#" aria-label="X">X</a><i aria-hidden="true">/</i>
+        <a href="#" aria-label="Dribbble">DR</a>
+      </nav>
+    </div>
+
+    <h1 class="mark mark-in" data-fit><span>Halden Studio</span></h1>
+
+    <div class="hero-bar rise" style="--rd:.9s">
+      <a href="#partners">Scroll down</a>
+      <time class="clock" data-clock data-tz="Europe/London">20:30 BST</time>
+      <span>London | UK</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================== PARTNERS ============================== -->
+    <section class="partners" id="partners" aria-label="Our stack">
+      <div class="wrap">
+        <p class="partners-label" data-reveal>Built with our stack</p>
+        <div class="logos" data-stagger>
+          <span class="l1">Figma</span>
+          <span class="l2">Framer</span>
+          <span class="l3">Webflow</span>
+          <span class="l4">Vercel</span>
+          <span class="l5">OpenAI</span>
+          <span class="l6">cursor</span>
+          <span class="l7">supabase</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== WHO WE ARE ============================== -->
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <span class="eyebrow" data-reveal>Who we are</span>
+        <h2 class="statement" id="about-title" data-split>We don’t just build websites—we build your best salesperson. AI does the heavy lifting, so we can obsess over the craft that converts.</h2>
+        <div class="about-img bronze-fallback" data-reveal style="--rd:.16s">
+          <canvas class="silk" data-silk="bronze" data-seed="6" data-scale="2.6" data-angle="1.4" data-waves="7" aria-hidden="true"></canvas>
+        </div>
+        <p class="lede" data-reveal>We pair senior designers and developers with an AI-assisted workflow, so research, copy and builds that once took months now take days, without cutting the corners that matter.</p>
+        <div data-reveal style="--rd:.08s"><a class="btn" href="#journey" data-magnetic>Know More About Us <span class="ico"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" /></svg></span></a></div>
+      </div>
+    </section>
+
+    <!-- ============================== SERVICES ============================== -->
+    <section class="services" id="services" aria-labelledby="svc-title">
+      <div class="wrap">
+        <div class="svc-head">
+          <div>
+            <span class="eyebrow" data-reveal>What we do</span>
+            <h2 class="h2" id="svc-title" data-split>Everything your website needs to start selling</h2>
+          </div>
+          <p data-reveal style="--rd:.1s">Four services, one team. Take the full build or just the part you’re missing, all on fixed prices agreed up front.</p>
+        </div>
+        <ul class="svc-list" data-stagger>
+          <li>
+            <a class="svc-row" href="#contact">
+              <span class="n">(01)</span>
+              <h3>Conversion strategy</h3>
+              <div class="svc-body">
+                <p>Offer, audience and page structure mapped in a day, using AI research across your reviews, competitors and search data.</p>
+                <div class="svc-tags"><span>Research</span><span>Messaging</span><span>Wireframes</span></div>
+              </div>
+              <span class="svc-go" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" /></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="svc-row" href="#contact">
+              <span class="n">(02)</span>
+              <h3>AI-assisted design</h3>
+              <div class="svc-body">
+                <p>Directions explored at machine speed, then refined by hand until every section earns its place and looks unmistakably yours.</p>
+                <div class="svc-tags"><span>Art direction</span><span>Design systems</span><span>Copy</span></div>
+              </div>
+              <span class="svc-go" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" /></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="svc-row" href="#contact">
+              <span class="n">(03)</span>
+              <h3>Build and launch</h3>
+              <div class="svc-body">
+                <p>Hand-finished builds in Webflow, Framer or Next.js. Fast, accessible, SEO-ready, and easy for your team to edit.</p>
+                <div class="svc-tags"><span>Webflow</span><span>Framer</span><span>Next.js</span></div>
+              </div>
+              <span class="svc-go" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" /></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="svc-row" href="#contact">
+              <span class="n">(04)</span>
+              <h3>Growth and CRO</h3>
+              <div class="svc-body">
+                <p>Monthly testing, new landing pages and AI-written variants, all measured against booked calls and revenue, not vanity metrics.</p>
+                <div class="svc-tags"><span>A/B testing</span><span>Landing pages</span><span>Analytics</span></div>
+              </div>
+              <span class="svc-go" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" /></svg></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================== SHOWCASE ============================== -->
+    <section class="showcase" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <h2 class="showcase-head" id="work-title" data-split>A showcase of the sites we’ve delivered</h2>
+        <div class="stack">
+          <a class="pcard" href="#" style="--i:0">
+            <div class="pcard-in bronze-fallback">
+              <canvas class="silk" data-silk="bronze" data-seed="2" data-scale="1.6" data-angle="1.5" data-waves="5" aria-hidden="true"></canvas>
+              <div class="chips"><span>Web Design</span><span>2025</span></div>
+              <div class="pcard-meta">
+                <div><b>Northvale Dental</b><small>Private dental group · Leeds</small></div>
+                <div class="stat"><b data-count>+64%</b><small>Booked consultations</small></div>
+              </div>
+            </div>
+          </a>
+          <a class="pcard" href="#" style="--i:1">
+            <div class="pcard-in dark-fallback">
+              <canvas class="silk" data-silk="crimson" data-seed="7" data-scale="1.6" data-angle="-1.1" data-waves="3" aria-hidden="true"></canvas>
+              <div class="chips"><span>E-commerce</span><span>2025</span></div>
+              <div class="pcard-meta">
+                <div><b>Kiln &amp; Co. Ceramics</b><small>Shopify rebuild · Bristol</small></div>
+                <div class="stat"><b data-count>£48k</b><small>First-month online sales</small></div>
+              </div>
+            </div>
+          </a>
+          <a class="pcard" href="#" style="--i:2">
+            <div class="pcard-in bronze-fallback">
+              <canvas class="silk" data-silk="bronze" data-seed="6" data-scale="2.0" data-angle="1.35" data-waves="6" aria-hidden="true"></canvas>
+              <div class="chips"><span>Landing Page</span><span>2024</span></div>
+              <div class="pcard-meta">
+                <div><b>Ledgerline Accounting</b><small>Lead generation · Manchester</small></div>
+                <div class="stat"><b data-count>3.1×</b><small>Enquiry conversion rate</small></div>
+              </div>
+            </div>
+          </a>
+          <a class="pcard" href="#" style="--i:3">
+            <div class="pcard-in bronze-fallback">
+              <canvas class="silk" data-silk="bronze" data-seed="8" data-scale="1.4" data-angle="1.2" data-waves="4" aria-hidden="true"></canvas>
+              <div class="chips"><span>Web Design</span><span>2024</span></div>
+              <div class="pcard-meta">
+                <div><b>Morrow Physio</b><small>Multi-site clinic · London</small></div>
+                <div class="stat"><b data-count>9 days</b><small>Brief to launch</small></div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== JOURNEY + TESTIMONIAL ============================== -->
+    <section class="story" id="journey" aria-labelledby="journey-title">
+      <div class="wrap story-grid">
+        <div class="jpanel dark-fallback" data-reveal data-journey data-active="0">
+          <canvas class="silk" data-silk="crimson" data-seed="2" data-scale="1.2" data-angle="-0.4" data-waves="2.4" aria-hidden="true"></canvas>
+          <div class="jcard">
+            <div class="jcard-head">Journey 22’–25’</div>
+            <div class="jcard-body">
+              <div class="jbrand">
+                <span class="jlogo" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M15.5 16.5a1.8 1.8 0 1 1 3.4.9 4.6 4.6 0 0 1-8.3-2.8 6.9 6.9 0 0 1 13.4-1.9 9.2 9.2 0 0 1-9.4 11.9" /></svg>
+                </span>
+                <div><b>© Halden Studio</b><small>Full-time AI Website Agency</small></div>
+              </div>
+              <div class="timeline" role="list" aria-label="Studio timeline">
+                <div class="jstep" role="listitem"><i></i><b>Studio founded</b><small>2022</small></div>
+                <div class="jstep" role="listitem"><i></i><b>First 100 sites</b><small>2023</small></div>
+                <div class="jstep" role="listitem"><i></i><b>AI in the loop</b><small>2024</small></div>
+                <div class="jstep" role="listitem"><i></i><b>7-day builds</b><small>2025</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-side">
+          <div>
+            <span class="eyebrow" data-reveal>Our journey</span>
+            <h2 class="h3" id="journey-title" data-split>From a two-person studio to 300+ launches, without losing the hand-finished detail.</h2>
+            <div class="stats" data-reveal style="--rd:.1s">
+              <div><b data-count>300+</b><span>Sites launched</span></div>
+              <div><b data-count>9 days</b><span>Average build</span></div>
+              <div><b data-count>4.9/5</b><span>Client rating</span></div>
+            </div>
+          </div>
+          <figure class="tcard" data-reveal style="--rd:.1s">
+            <div class="stars" role="img" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 12 12"><path d="M6 .5l1.63 3.52 3.87.45-2.86 2.63.77 3.8L6 9.02 2.59 10.9l.77-3.8L.5 4.47l3.87-.45z" /></svg>
+              <svg viewBox="0 0 12 12"><path d="M6 .5l1.63 3.52 3.87.45-2.86 2.63.77 3.8L6 9.02 2.59 10.9l.77-3.8L.5 4.47l3.87-.45z" /></svg>
+              <svg viewBox="0 0 12 12"><path d="M6 .5l1.63 3.52 3.87.45-2.86 2.63.77 3.8L6 9.02 2.59 10.9l.77-3.8L.5 4.47l3.87-.45z" /></svg>
+              <svg viewBox="0 0 12 12"><path d="M6 .5l1.63 3.52 3.87.45-2.86 2.63.77 3.8L6 9.02 2.59 10.9l.77-3.8L.5 4.47l3.87-.45z" /></svg>
+              <svg viewBox="0 0 12 12"><path d="M6 .5l1.63 3.52 3.87.45-2.86 2.63.77 3.8L6 9.02 2.59 10.9l.77-3.8L.5 4.47l3.87-.45z" /></svg>
+            </div>
+            <blockquote>“Halden rebuilt our site in eleven days. Consultation requests were up 64% in the first month, and for the first time our website does the selling before we ever pick up the phone.”</blockquote>
+            <figcaption>Priya Nair, Founder at Northvale Dental</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer class="footer dark-fallback" id="contact">
+    <canvas class="silk" data-silk="ember" data-seed="4" data-scale="1.3" data-angle="-1.0" data-waves="3.2" aria-hidden="true"></canvas>
+    <div class="fcard" data-grow>
+      <div class="ftop">
+        <div>
+          <h2 class="ftitle">One brief, one craft</h2>
+          <p class="fcopy">© <span data-year>2026</span> Halden Studio. All rights reserved.</p>
+          <form class="news" data-newsletter novalidate>
+            <label for="nl-email">Subscribe to our newsletter</label>
+            <div class="news-field">
+              <input id="nl-email" type="email" name="email" placeholder="Your email" autocomplete="email" required />
+              <button type="submit"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h9.5M6.5 2l4 4-4 4" /></svg>Subscribe</button>
+            </div>
+          </form>
+        </div>
+        <nav class="flinks" aria-label="Footer">
+          <ul>
+            <li><a href="#top">Home</a><sup><a href="../site/">(01)</a><a href="../vsl/">(02)</a></sup></li>
+            <li><a href="#about">About us</a></li>
+            <li><a href="#work">Projects</a><sup><a href="#work">(01)</a><a href="#work">(02)</a><a href="#work">(03)</a></sup></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#journey">Journey</a></li>
+            <li><a href="mailto:hello@haldenstudio.co">Contact us</a></li>
+          </ul>
+          <ul>
+            <li><a href="mailto:hello@haldenstudio.co">Email</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="mark fmark" data-fit aria-hidden="true"><span>Halden Studio</span></p>
+    </div>
+  </footer>
+
+  <script src="../../_shared/motion.js"></script>
+  <script src="../../_shared/silk.js"></script>
+  <script src="../assets/theme.js"></script>
+</body>
+</html>

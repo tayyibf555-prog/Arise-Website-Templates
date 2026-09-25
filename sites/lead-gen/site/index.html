@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Novaleads · AI Lead Generation Agency</title>
+  <meta name="description" content="Paid ads, AI outbound and automated follow-ups working as one system to keep your sales calendar full." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/theme.css" />
+  <style>
+    /* Hero */
+    .hero { min-height: max(760px, 100svh); display: flex; flex-direction: column; }
+    .hero-body {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 32px;
+      padding-bottom: clamp(96px, 14vh, 150px);
+    }
+    .hero .display { font-size: clamp(64px, 9.4vw, 136px); margin-top: 26px; }
+    .hero .badge { margin: 0 clamp(0px, 4vw, 60px) clamp(40px, 8vh, 90px) 0; }
+    .hero .arc { left: calc(50% - 370px); top: calc(100% - 400px); }
+
+    /* About panel */
+    .about { padding: clamp(56px, 7vw, 88px) 0 clamp(40px, 5vw, 56px); }
+    .about .h2 { margin-top: 28px; max-width: 12ch; }
+    .about .lede { max-width: 50ch; }
+    .about .stats { margin-top: clamp(32px, 4vw, 44px); }
+    .about-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-top: clamp(48px, 7vw, 72px); }
+
+    /* Services */
+    .services { padding: clamp(64px, 8vw, 104px) 0 clamp(56px, 7vw, 88px); }
+    .svc-cta { margin-top: clamp(28px, 4vw, 40px); }
+
+    /* Dot grid */
+    .approach { padding: clamp(56px, 8vw, 96px) 0; }
+    .approach .wrap { position: relative; min-height: 240px; display: flex; justify-content: flex-end; align-items: center; }
+    .approach .bullet { max-width: 460px; font-size: 16px; line-height: 1.55; letter-spacing: -0.015em; margin: 0; }
+    .approach .ping.a { left: 26%; top: 62%; }
+    .approach .ping.b { left: 58%; top: 16%; width: 7px; height: 7px; opacity: 0.8; }
+
+    /* Numbers */
+    .results { background: #fff; padding: clamp(56px, 7vw, 88px) 0; }
+    .results .h3 { max-width: 13ch; }
+
+    /* Testimonials */
+    .voices { background: #fff; padding: 0 0 clamp(64px, 8vw, 96px); }
+    .voices .wrap { padding-left: clamp(12px, 2vw, 24px); padding-right: clamp(12px, 2vw, 24px); max-width: calc(var(--wrap) + 32px); }
+
+    /* Closing CTA */
+    .closing { text-align: center; padding: clamp(96px, 12vw, 160px) 0 clamp(112px, 14vw, 180px); }
+    .closing .display { font-size: clamp(48px, 7vw, 100px); margin: 26px auto 0; }
+    .closing .display .ln { margin: 0 auto; }
+    .closing p { max-width: 46ch; margin: 24px auto 36px; color: #b3b5c6; font-size: 17px; letter-spacing: -0.015em; }
+    .closing .arc { left: calc(50% - 1300px); top: calc(100% - 150px); }
+
+    @media (max-width: 900px) {
+      .hero-body { flex-direction: column; align-items: flex-start; justify-content: flex-end; }
+      .hero .badge { order: -1; align-self: flex-end; margin: 0 0 20px; }
+      .about-foot { flex-direction: column; align-items: flex-start; }
+      .approach .wrap { min-height: 0; padding-top: 80px; }
+      .approach .ping.a { left: 12%; top: 10%; }
+    }
+  </style>
+</head>
+<body data-email="hello@novaleads.co">
+
+  <!-- ============================== HERO ============================== -->
+  <header class="cosmos hero">
+    <div class="stars"></div>
+    <div class="stars far"></div>
+    <div class="arc" aria-hidden="true" data-parallax="0.3"></div>
+
+    <nav class="wrap nav" aria-label="Main">
+      <a class="brand" href="#">
+        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M8 3.5h13A3.5 3.5 0 0 1 24.5 7v13a3.5 3.5 0 0 1-3.5 3.5H3.5V8A4.5 4.5 0 0 1 8 3.5Z" stroke-linejoin="round"/><path d="M14 9v10M9 14h10" stroke-linecap="round"/></svg>
+        Novaleads
+      </a>
+      <div class="pills">
+        <a href="#services">Services</a>
+        <a href="#testimonials">Testimonial</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <div class="wrap hero-body">
+      <div>
+        <span class="tag rise" style="--rd:.1s"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0C52 30 70 48 100 50 70 52 52 70 50 100 48 70 30 52 0 50 30 48 48 30 50 0Z"/></svg>Data-Driven And Automated</span>
+        <h1 class="display">
+          <span class="ln rise" style="--rd:.2s">Your Pipeline</span>
+          <span class="ln b rise" style="--rd:.32s">Growth</span>
+          <span class="ln c rise" style="--rd:.44s">Partner</span>
+        </h1>
+      </div>
+      <div class="badge rise" style="--rd:.6s" aria-hidden="true">
+        <svg class="ring" viewBox="0 0 132 132"><defs><path id="ring" d="M66 66m-52 0a52 52 0 1 1 104 0a52 52 0 1 1-104 0"/></defs><text><textPath href="#ring" textLength="326" lengthAdjust="spacing">AI lead gen · booked calls · </textPath></text></svg>
+        <svg class="spark" viewBox="0 0 100 100"><path d="M50 0C52 30 70 48 100 50 70 52 52 70 50 100 48 70 30 52 0 50 30 48 48 30 50 0Z"/></svg>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================== ABOUT ============================== -->
+    <section class="panel about" id="about">
+      <div class="wrap">
+        <div class="split">
+          <div data-reveal>
+            <svg class="panel-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 3.5h13A3.5 3.5 0 0 1 24.5 7v13a3.5 3.5 0 0 1-3.5 3.5H3.5V8A4.5 4.5 0 0 1 8 3.5Z" stroke-linejoin="round"/><path d="M14 9v10M9 14h10" stroke-linecap="round"/></svg>
+            <h2 class="h2" data-split>Predictable Pipeline: Your Outbound Partner</h2>
+          </div>
+          <div data-reveal style="--rd:.1s">
+            <p class="lede">We build lead generation systems for B2B teams tired of feast-or-famine months. From paid ads and AI-personalised cold email to follow-ups that never forget a lead, every channel feeds one calendar. <span class="fade-text">Whether you're a founder still closing every deal yourself or a sales team that needs more at-bats, we plug in, launch within weeks and report on the only number that matters: qualified calls booked.</span></p>
+            <div class="stats">
+              <div class="stat"><b data-count>3.4x</b><span>Pipeline Growth</span></div>
+              <div class="stat"><b data-count>£12m</b><span>Revenue Influenced</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="about-foot" id="contact">
+          <div class="connect" data-reveal>
+            <p>Hey! feel free to<br />connect with us</p>
+            <div class="keys" aria-label="Press Command C to copy our email">
+              <button class="keycap" type="button" aria-label="Copy email">⌘</button>
+              <button class="keycap" type="button" aria-label="Copy email">C</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== SERVICES ============================== -->
+    <section class="services" id="services">
+      <div class="wrap">
+        <h2 class="h3" data-split>What Can We Do<br />For your Business?</h2>
+        <ul class="svc-list" data-reveal style="--rd:.1s">
+          <li class="svc-item on" tabindex="0">
+            <div class="svc"><small>(01)</small><strong>Paid Ads That Actually Convert</strong><svg class="q" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M4 5h6v6c0 4-2 6.5-5 7.5l-.7-1.6C6.2 16 7 14.6 7 12.5H4V5Zm10 0h6v6c0 4-2 6.5-5 7.5l-.7-1.6c1.9-.9 2.7-2.3 2.7-4.4h-3V5Z"/></svg></div>
+            <span class="svc-desc">Meta, Google and LinkedIn campaigns built around one goal: calls on the calendar, not clicks.</span>
+          </li>
+          <li class="svc-item" tabindex="0">
+            <div class="svc"><small>(02)</small><strong>AI Outbound and Cold Email</strong><svg class="q" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M4 5h6v6c0 4-2 6.5-5 7.5l-.7-1.6C6.2 16 7 14.6 7 12.5H4V5Zm10 0h6v6c0 4-2 6.5-5 7.5l-.7-1.6c1.9-.9 2.7-2.3 2.7-4.4h-3V5Z"/></svg></div>
+            <span class="svc-desc">Researched lists and personalised first lines at scale, sent from warmed domains that land in the inbox.</span>
+          </li>
+          <li class="svc-item" tabindex="0">
+            <div class="svc"><small>(03)</small><strong>Automated Follow-ups and Nurture</strong><svg class="q" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M4 5h6v6c0 4-2 6.5-5 7.5l-.7-1.6C6.2 16 7 14.6 7 12.5H4V5Zm10 0h6v6c0 4-2 6.5-5 7.5l-.7-1.6c1.9-.9 2.7-2.3 2.7-4.4h-3V5Z"/></svg></div>
+            <span class="svc-desc">AI agents reply, qualify and rebook within minutes over email, SMS and WhatsApp, so no lead goes cold.</span>
+          </li>
+          <li class="svc-item" tabindex="0">
+            <div class="svc"><small>(04)</small><strong>CRM, Tracking and Reporting</strong><svg class="q" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M4 5h6v6c0 4-2 6.5-5 7.5l-.7-1.6C6.2 16 7 14.6 7 12.5H4V5Zm10 0h6v6c0 4-2 6.5-5 7.5l-.7-1.6c1.9-.9 2.7-2.3 2.7-4.4h-3V5Z"/></svg></div>
+            <span class="svc-desc">Every lead traced from first touch to closed deal, with a live dashboard your finance team will trust.</span>
+          </li>
+        </ul>
+        <div class="svc-cta" data-reveal style="--rd:.2s">
+          <span>Have other idea?</span>
+          <a class="btn btn-white" href="#contact">Explore Our Services <span class="go"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 4 4-4 4M8.5 4l4 4-4 4"/></svg></span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== APPROACH (dot grid) ============================== -->
+    <section class="dotgrid approach" aria-label="Our approach">
+      <div class="wrap">
+        <span class="ping a" aria-hidden="true"></span>
+        <span class="ping b" aria-hidden="true"></span>
+        <p class="bullet" data-reveal>We combine sharp offers, creative that stops the scroll and AI automation that never sleeps to deliver a steady flow of qualified calls. From the first ad impression to the final follow-up, we work closely with you to turn attention into revenue.</p>
+      </div>
+    </section>
+
+    <!-- ============================== NUMBERS ============================== -->
+    <section class="results" aria-labelledby="numbers-title">
+      <div class="wrap numbers">
+        <div class="numbers-head" data-reveal>
+          <h2 class="h3" id="numbers-title" data-split>Not just any number, the ones that fill your calendar</h2>
+          <div><a class="btn btn-black" href="#contact">Let's Talk <span class="go"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 4 4-4 4M8.5 4l4 4-4 4"/></svg></span></a></div>
+        </div>
+        <div class="ngrid" data-reveal style="--rd:.1s">
+          <div class="ncell"><span class="label">Booked Calls</span><b data-count>1,200+</b><p>Qualified sales calls booked for clients last year</p></div>
+          <div class="ncell"><span class="label">Cost per Lead</span><b data-count>−46%</b><p>Average drop in cost per lead after 90 days</p></div>
+          <div class="ncell"><span class="label">Reply Rate</span><b data-count>11.8%</b><p>Positive reply rate on AI-personalised outbound</p></div>
+          <div class="ncell"><span class="label">Revenue</span><b data-count>£12m</b><p>Pipeline revenue influenced across client accounts</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== TESTIMONIALS ============================== -->
+    <section class="voices" id="testimonials" aria-labelledby="voices-title">
+      <div class="wrap">
+        <div class="quote-card" data-carousel data-reveal>
+          <div class="quote-top">
+            <div class="quote-title">
+              <svg class="quote-mark" viewBox="0 0 48 40" aria-hidden="true"><path d="M0 40V24C0 10 6 2 18 0l2 5c-6 2-9 6-9.5 12H20v23H0Zm28 0V24c0-14 6-22 18-24l2 5c-6 2-9 6-9.5 12H48v23H28Z"/></svg>
+              <h2 class="h3" id="voices-title" data-split>See How We Fill<br />Calendars For Real Teams</h2>
+            </div>
+            <div class="arrows">
+              <button type="button" data-prev aria-label="Previous testimonial"><svg viewBox="0 0 16 16"><path d="M13 8H3m4-4L3 8l4 4"/></svg></button>
+              <button type="button" data-next aria-label="Next testimonial"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+            </div>
+          </div>
+          <div class="slides" aria-live="polite">
+            <div class="slide quote-body on">
+              <div class="person"><span class="avatar">SM</span><div><b>Sarah Mitchell</b><span>Group Marketing Manager</span></div></div>
+              <p class="quote-text">“Working with Novaleads rebuilt our pipeline from the ground up. Their outbound engine and follow-up automation took us from a handful of calls a month to a full calendar, and our sales team finally spends its time selling.”</p>
+            </div>
+            <div class="slide quote-body">
+              <div class="person"><span class="avatar">DO</span><div><b>Daniel Okafor</b><span>Founder, Brightpath Consulting</span></div></div>
+              <p class="quote-text">“We'd tried two agencies before. The difference here was speed: campaigns were live in twelve days and we booked 34 qualified calls in the first month. The reporting shows exactly where every one came from.”</p>
+            </div>
+            <div class="slide quote-body">
+              <div class="person"><span class="avatar">PR</span><div><b>Priya Raman</b><span>Head of Sales, Keystone SaaS</span></div></div>
+              <p class="quote-text">“The AI follow-ups are the quiet hero. Leads that used to go cold over a weekend now get a thoughtful reply in minutes. Our show-up rate jumped from 58% to 81%.”</p>
+            </div>
+          </div>
+          <p class="count"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== CLOSING ============================== -->
+    <section class="cosmos closing" aria-labelledby="closing-title">
+      <div class="stars"></div>
+      <div class="arc" aria-hidden="true"></div>
+      <div class="wrap" data-reveal>
+        <span class="tag"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0C52 30 70 48 100 50 70 52 52 70 50 100 48 70 30 52 0 50 30 48 48 30 50 0Z"/></svg>Free pipeline audit</span>
+        <h2 class="display" id="closing-title"><span class="ln">Ready For A Calendar</span><span class="ln c">That Fills Itself?</span></h2>
+        <p>Book a 30-minute call. We'll map where your next 30 qualified calls come from, whether you work with us or not.</p>
+        <a class="btn btn-white lg" href="#contact">Book a Strategy Call <span class="go"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 4 4-4 4M8.5 4l4 4-4 4"/></svg></span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <a class="brand" href="#">
+        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M8 3.5h13A3.5 3.5 0 0 1 24.5 7v13a3.5 3.5 0 0 1-3.5 3.5H3.5V8A4.5 4.5 0 0 1 8 3.5Z" stroke-linejoin="round"/><path d="M14 9v10M9 14h10" stroke-linecap="round"/></svg>
+        Novaleads
+      </a>
+      <nav aria-label="Footer"><a href="#services">Services</a><a href="#testimonials">Testimonials</a><a href="#about">About</a><a href="mailto:hello@novaleads.co">hello@novaleads.co</a></nav>
+      <span>© <span data-year>2026</span> Novaleads Ltd.</span>
+    </div>
+  </footer>
+
+  <script src="../../_shared/vendor/gsap/gsap.min.js"></script>
+  <script src="../../_shared/vendor/gsap/ScrollTrigger.min.js"></script>
+  <script src="../../_shared/vendor/gsap/SplitText.min.js"></script>
+  <script src="../../_shared/motion.js"></script>
+  <script src="../assets/theme.js"></script>
+</body>
+</html>

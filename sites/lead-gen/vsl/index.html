@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Novaleads · 30+ Qualified Sales Calls In 60 Days</title>
+  <meta name="description" content="Watch the 7-minute breakdown of the ads, outbound and AI follow-up system that books qualified sales calls for B2B teams." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/theme.css" />
+  <style>
+    body { background: #fff; }
+
+    /* ---------------- Hero + VSL ---------------- */
+    .vhero {
+      text-align: center;
+      /* Bottom strip is empty space that melts into the white page instead of a hard edge */
+      --fade: clamp(150px, 17vw, 240px);
+      padding-bottom: var(--fade);
+      -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - var(--fade)), rgba(0, 0, 0, 0.5) calc(100% - var(--fade) * 0.45), transparent);
+      mask-image: linear-gradient(to bottom, #000 calc(100% - var(--fade)), rgba(0, 0, 0, 0.5) calc(100% - var(--fade) * 0.45), transparent);
+    }
+    .panel.problem { margin-top: 0; border-radius: 0; }
+    .vhero .nav { padding-bottom: clamp(24px, 4vw, 48px); }
+    .vhero .display { font-size: clamp(42px, 6vw, 88px); margin: 24px auto 0; line-height: 0.94; }
+    .vhero .display .ln { margin: 0 auto; }
+    .vhero .sub { max-width: 60ch; margin: 22px auto 0; color: #b7b9ca; font-size: clamp(16px, 1.35vw, 18px); letter-spacing: -0.015em; }
+    .vhero .arc { left: calc(50% - 1300px); top: calc(100% - 260px); }
+
+    .vsl { position: relative; max-width: 980px; margin: clamp(36px, 5vw, 56px) auto 0; }
+    .vsl-frame {
+      padding: 8px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 50px 120px -40px rgba(60, 72, 255, 0.65);
+    }
+    .vsl-screen {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 17px;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px) 0 0 / 100% 48px,
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px) 0 0 / 48px 100%,
+        radial-gradient(80% 100% at 15% 0%, #3342f0 0%, #141a8c 38%, #060726 72%, #000 100%);
+    }
+    .vsl-screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .vsl-play {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      border: 0;
+      background: none;
+      color: #fff;
+    }
+    .play-btn {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: clamp(68px, 9vw, 104px);
+      height: clamp(68px, 9vw, 104px);
+      border-radius: 50%;
+      background: #fff;
+      color: var(--text);
+      box-shadow: 0 0 0 12px rgba(255, 255, 255, 0.1), 0 0 0 28px rgba(255, 255, 255, 0.05);
+      transition: transform 0.4s var(--ease);
+    }
+    .play-btn svg { width: 30%; height: 30%; margin-left: 6%; fill: currentColor; }
+    .play-btn::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
+      animation: pulse 2.4s var(--ease) infinite;
+    }
+    @keyframes pulse { from { transform: scale(1); opacity: 0.9; } to { transform: scale(1.9); opacity: 0; } }
+    .vsl-play:hover .play-btn { transform: scale(1.06); }
+    .chip {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-size: 12.5px;
+      color: #fff;
+      pointer-events: none;
+    }
+    .chip svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .chip.sound { top: 18px; left: 18px; }
+    .chip.time { bottom: 26px; right: 18px; font-variant-numeric: tabular-nums; }
+    .vsl-caption {
+      position: absolute;
+      left: 22px;
+      bottom: 24px;
+      max-width: 60%;
+      text-align: left;
+      font-size: clamp(15px, 1.7vw, 22px);
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      pointer-events: none;
+    }
+    .vsl-caption small { display: block; font-size: 12px; color: #a9acc4; letter-spacing: 0; margin-bottom: 6px; }
+    .vsl-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: rgba(255, 255, 255, 0.14); pointer-events: none; }
+    .vsl-bar::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2%; background: #fff; }
+    .vsl.playing .chip, .vsl.playing .vsl-caption, .vsl.playing .vsl-bar { display: none; }
+    .vsl .badge { position: absolute; right: -46px; top: -54px; z-index: 2; }
+
+    .hero-cta { margin-top: clamp(36px, 4vw, 48px); display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .micro { margin: 0; font-size: 13.5px; color: #a3a6ba; letter-spacing: -0.005em; }
+    .micro span + span::before { content: '·'; opacity: 0.45; margin: 0 8px; }
+    .proof { display: flex; align-items: center; gap: 14px; margin-top: 10px; }
+    .faces { display: flex; }
+    .faces span {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: grid; place-items: center;
+      margin-left: -9px;
+      border: 2px solid #07071a;
+      font-size: 11px; font-weight: 600; color: #fff;
+    }
+    .faces span:first-child { margin-left: 0; }
+    .proof p { margin: 0; text-align: left; font-size: 13px; color: #c7c9d8; line-height: 1.35; }
+    .stars5 { color: #fff; letter-spacing: 2px; font-size: 12px; }
+
+    /* ---------------- Logos + problem ---------------- */
+    .problem { padding: clamp(48px, 6vw, 72px) 0 clamp(64px, 8vw, 104px); }
+    .logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 36px; padding-bottom: clamp(48px, 6vw, 72px); border-bottom: 1px solid var(--line); }
+    .logos p { margin: 0; font-size: 13px; color: var(--grey); flex-basis: 100%; text-align: center; }
+    .logos b { font-size: 21px; color: #a2a3ae; letter-spacing: -0.03em; }
+    .logos .l1 { font-weight: 700; }
+    .logos .l2 { font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; font-size: 16px; }
+    .logos .l3 { font-weight: 600; font-style: italic; }
+    .logos .l4 { font-weight: 500; letter-spacing: -0.05em; }
+    .logos .l5 { font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; font-size: 15px; }
+    .problem .split { margin-top: clamp(48px, 6vw, 72px); }
+    .problem .h2 { margin-top: 24px; max-width: 13ch; }
+    .pains { list-style: none; padding: 0; margin: 32px 0 0; display: grid; gap: 4px; }
+    .pains li { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; border-top: 1px solid var(--line); font-size: 17px; letter-spacing: -0.02em; }
+    .pains li:last-child { border-bottom: 1px solid var(--line); }
+    .pains i {
+      flex: none; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%;
+      display: grid; place-items: center; background: #f0f0f4; color: #7c7d8a; font-style: normal; font-size: 12px;
+    }
+
+    /* ---------------- Offer (services) ---------------- */
+    .services { padding: clamp(64px, 8vw, 104px) 0 clamp(56px, 7vw, 88px); }
+    .services .kicker { display: inline-block; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #aeb2ff; margin-bottom: 18px; }
+    .svc-cta { margin-top: clamp(28px, 4vw, 40px); }
+
+    /* ---------------- Process ---------------- */
+    .process { padding: clamp(64px, 8vw, 104px) 0; }
+    .process-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+    .process-head p { margin: 0; max-width: 38ch; color: var(--grey); }
+    .steps { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: clamp(40px, 5vw, 56px); padding-top: 34px; }
+    .steps::before { content: ''; position: absolute; top: 4px; left: 4px; right: 0; height: 1px; background: linear-gradient(90deg, var(--blue-dot), rgba(45, 91, 255, 0.08)); }
+    .steps .ping { top: 0; }
+    .step { position: relative; padding: 26px; border-radius: 20px; background: #fff; border: 1px solid var(--line); box-shadow: 0 20px 40px -30px rgba(20, 24, 80, 0.25); }
+    .step small { font-size: 12px; color: var(--grey); letter-spacing: 0.02em; }
+    .step h3 { margin: 14px 0 10px; font-weight: 500; font-size: 22px; letter-spacing: -0.035em; }
+    .step p { margin: 0; color: #5f606c; font-size: 15px; line-height: 1.55; letter-spacing: -0.01em; }
+
+    /* ---------------- Numbers + testimonials ---------------- */
+    .results { padding: clamp(64px, 8vw, 96px) 0; }
+    .results .h3 { max-width: 13ch; }
+    .voices { padding: 0 0 clamp(56px, 7vw, 88px); }
+    .voices .wrap { padding-left: clamp(12px, 2vw, 24px); padding-right: clamp(12px, 2vw, 24px); max-width: calc(var(--wrap) + 32px); }
+
+    /* ---------------- Guarantee ---------------- */
+    .guarantee { padding: clamp(24px, 4vw, 40px) 0 clamp(64px, 8vw, 96px); }
+    .g-card {
+      display: flex;
+      align-items: center;
+      gap: clamp(28px, 5vw, 64px);
+      padding: clamp(28px, 5vw, 56px);
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(60% 90% at 0% 50%, rgba(80, 92, 255, 0.12), transparent 70%),
+        linear-gradient(#fff, #f7f7fb);
+    }
+    .badge.dark text { fill: var(--text); }
+    .badge.dark .spark { fill: var(--blue-dot); }
+    .g-card .h3 { max-width: 20ch; }
+    .g-card p { margin: 14px 0 0; color: #5f606c; max-width: 58ch; font-size: 16.5px; letter-spacing: -0.015em; }
+
+    /* ---------------- FAQ ---------------- */
+    .faq { padding: 0 0 clamp(72px, 9vw, 120px); }
+    .faq .wrap { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(32px, 5vw, 72px); }
+    .faq-list details { border-top: 1px solid var(--line); }
+    .faq-list details:last-child { border-bottom: 1px solid var(--line); }
+    .faq-list summary {
+      display: flex; justify-content: space-between; align-items: center; gap: 20px;
+      padding: 22px 0; cursor: pointer; list-style: none;
+      font-size: 18px; letter-spacing: -0.025em;
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary i {
+      flex: none; position: relative; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line);
+      transition: transform 0.35s var(--ease), background 0.25s;
+    }
+    .faq-list summary i::before, .faq-list summary i::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 1.5px; background: var(--text); transform: translate(-50%, -50%); }
+    .faq-list summary i::after { transform: translate(-50%, -50%) rotate(90deg); }
+    .faq-list details[open] summary i { transform: rotate(45deg); background: #f0f0f4; }
+    .faq-list details p { margin: -6px 0 22px; color: #5f606c; max-width: 60ch; letter-spacing: -0.01em; }
+
+    /* ---------------- Closing ---------------- */
+    .closing { text-align: center; padding: clamp(96px, 12vw, 160px) 0 clamp(112px, 14vw, 180px); }
+    .closing .display { font-size: clamp(48px, 7vw, 100px); margin: 26px auto 0; }
+    .closing .display .ln { margin: 0 auto; }
+    .closing .sub { max-width: 46ch; margin: 24px auto 36px; color: #b3b5c6; font-size: 17px; letter-spacing: -0.015em; }
+    .closing .micro { margin-top: 18px; }
+    .closing .arc { left: calc(50% - 1300px); top: calc(100% - 150px); }
+
+    /* ---------------- Sticky CTA ---------------- */
+    .sticky-cta {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 7px 7px 7px 20px;
+      border-radius: 999px;
+      background: rgba(10, 10, 16, 0.86);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #fff;
+      font-size: 14px;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      transform: translate(-50%, 160%);
+      transition: transform 0.5s var(--ease);
+    }
+    .sticky-cta.show { transform: translate(-50%, 0); }
+    .sticky-cta .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #5ee08a; margin-right: 8px; box-shadow: 0 0 0 3px rgba(94, 224, 138, 0.18); }
+
+    @media (max-width: 900px) {
+      .steps { grid-template-columns: 1fr; padding-top: 0; }
+      .steps::before, .steps .ping { display: none; }
+      .faq .wrap { grid-template-columns: 1fr; }
+      .g-card { flex-direction: column; align-items: flex-start; }
+      .vsl .badge { right: -8px; top: -58px; width: 96px; height: 96px; }
+      .logos { justify-content: center; }
+    }
+    @media (max-width: 560px) {
+      .vsl-caption, .chip.time { display: none; }
+      .chip.sound { top: 12px; left: 12px; }
+      .sticky-cta .lbl { display: none; }
+      .micro span + span::before { display: none; }
+      .micro { display: flex; flex-direction: column; gap: 2px; }
+    }
+  </style>
+</head>
+<body data-email="hello@novaleads.co">
+
+  <!-- ============================== HERO + VSL ============================== -->
+  <header class="cosmos vhero">
+    <div class="stars"></div>
+    <div class="stars far"></div>
+    <div class="arc" aria-hidden="true"></div>
+
+    <nav class="wrap nav" aria-label="Main">
+      <a class="brand" href="#">
+        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M8 3.5h13A3.5 3.5 0 0 1 24.5 7v13a3.5 3.5 0 0 1-3.5 3.5H3.5V8A4.5 4.5 0 0 1 8 3.5Z" stroke-linejoin="round"/><path d="M14 9v10M9 14h10" stroke-linecap="round"/></svg>
+        Novaleads
+      </a>
+      <a class="btn btn-white" href="#book">Book a Call <span class="go"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 4 4-4 4M8.5 4l4 4-4 4"/></svg></span></a>
+    </nav>
+
+    <div class="wrap">
+      <span class="tag rise" style="--rd:.1s"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0C52 30 70 48 100 50 70 52 52 70 50 100 48 70 30 52 0 50 30 48 48 30 50 0Z"/></svg>For B2B teams doing £30k+ a month</span>
+      <h1 class="display">
+        <span class="ln rise" style="--rd:.2s">Add 30+ Qualified Sales Calls</span>
+        <span class="ln c rise" style="--rd:.32s">To Your Calendar In 60 Days</span>
+      </h1>
+      <p class="sub rise" style="--rd:.44s">Watch the 7-minute breakdown of the ads, outbound and AI follow-up system we install for B2B companies, and how yours could be running within two weeks.</p>
+
+      <div class="vsl rise" style="--rd:.55s" data-vsl data-embed="">
+        <div class="badge" aria-hidden="true">
+          <svg class="ring" viewBox="0 0 132 132"><defs><path id="ring" d="M66 66m-52 0a52 52 0 1 1 104 0a52 52 0 1 1-104 0"/></defs><text><textPath href="#ring" textLength="326" lengthAdjust="spacing">Watch first · 7 minutes · </textPath></text></svg>
+          <svg class="spark" viewBox="0 0 100 100"><path d="M50 0C52 30 70 48 100 50 70 52 52 70 50 100 48 70 30 52 0 50 30 48 48 30 50 0Z"/></svg>
+        </div>
+        <div class="vsl-frame" data-grow>
+          <div class="vsl-screen">
+            <span class="chip sound"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 8v4h3l4 3.5v-11L6 8H3Z"/><path d="m13.5 7.5 4 5m0-5-4 5"/></svg>Click to watch with sound</span>
+            <div class="vsl-caption"><small>Free training</small>The 3-part system behind 1,200+ booked sales calls</div>
+            <span class="chip time">07:42</span>
+            <span class="vsl-bar"></span>
+            <button class="vsl-play" type="button" aria-label="Play video">
+              <span class="play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17l14-8.5L6 3.5Z"/></svg></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-cta rise" style="--rd:.7s">
+        <a class="btn btn-white lg" href="#book" data-sticky-anchor>Book Your Free Pipeline Audit <span class="go"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 4 4-4 4M8.5 4l4 4-4 4"/></svg></span></a>
+        <p class="micro"><span>30-minute call</span><span>No contracts</span><span>Leave with a plan either way</span></p>
+        <div class="proof">
+          <div class="faces" aria-hidden="true">
+            <span style="background:#3b46f2">SM</span><span style="background:#6a4cff">DO</span><span style="background:#1c28c9">PR</span><span style="background:#4b5563">TH</span><span style="background:#2d5bff">JL</span>
+          </div>
+          <p><span class="stars5" aria-label="5 stars">★★★★★</span><br />Rated 4.9 by 120+ B2B teams</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================== PROBLEM ============================== -->
+    <section class="panel problem">
+      <div class="wrap">
+        <div class="logos" data-reveal>
+          <p>Trusted by growth teams at</p>
+          <b class="l1">Northwind</b><b class="l2">Halcyon</b><b class="l3">Brightpath</b><b class="l4">keystone</b><b class="l5">Lumen &amp; Co</b>
+        </div>
+        <div class="split">
+          <div data-reveal>
+            <svg class="panel-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 3.5h13A3.5 3.5 0 0 1 24.5 7v13a3.5 3.5 0 0 1-3.5 3.5H3.5V8A4.5 4.5 0 0 1 8 3.5Z" stroke-linejoin="round"/><path d="M14 9v10M9 14h10" stroke-linecap="round"/></svg>
+            <h2 class="h2" data-split>Your Pipeline Shouldn't Run On Referrals And Luck</h2>
+          </div>
+          <div data-reveal style="--rd:.1s">
+            <p class="lede">Most B2B companies grow on word of mouth until it stops. Then the calendar empties, the founder goes back to prospecting, and growth stalls for a quarter. <span class="fade-text">Buying more leads rarely fixes it. What fixes it is one connected system where ads, outbound and follow-up feed each other, and nobody has to remember to chase.</span></p>
+            <ul class="pains">
+              <li><i aria-hidden="true">✕</i>Some months bring 20 calls, the next brings 2</li>
+              <li><i aria-hidden="true">✕</i>Your team spends hours chasing leads that were never going to buy</li>
+              <li><i aria-hidden="true">✕</i>Good leads go cold because nobody followed up in time</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== OFFER ============================== -->
+    <section class="services" id="offer">
+      <div class="wrap">
+        <span class="kicker" data-reveal>What's included</span>
+        <h2 class="h3" data-split>Everything Needed<br />To Fill Your Calendar</h2>
+        <ul class="svc-list" data-reveal style="--rd:.1s">
+          <li class="svc-item on" tabindex="0">
+            <div class="svc"><small>(01)</small><strong>Paid Ads That Actually Convert</strong><svg class="q" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M4 5h6v6c0 4-2 6.5-5 7.5l-.7-1.6C6.2 16 7 14.6 7 12.5H4V5Zm10 0h6v6c0 4-2 6.5-5 7.5l-.7-1.6c1.9-.9 2.7-2.3 2.7-4.4h-3V5Z"/></svg></div>
+            <span class="svc-desc">Meta, Google and LinkedIn campaigns built around one goal: calls on the calendar, not clicks.</span>
+          </li>
+          <li class="svc-item" tabindex="0">
+            <div class="svc"><small>(02)</small><strong>AI Outbound and Cold Email</strong><svg class="q" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M4 5h6v6c0 4-2 6.5-5 7.5l-.7-1.6C6.2 16 7 14.6 7 12.5H4V5Zm10 0h6v6c0 4-2 6.5-5 7.5l-.7-1.6c1.9-.9 2.7-2.3 2.7-4.4h-3V5Z"/></svg></div>
+            <span class="svc-desc">Researched lists and personalised first lines at scale, sent from warmed domains that land in the inbox.</span>
+          </li>
+          <li class="svc-item" tabindex="0">
+            <div class="svc"><small>(03)</small><strong>Automated Follow-ups and Nurture</strong><svg class="q" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M4 5h6v6c0 4-2 6.5-5 7.5l-.7-1.6C6.2 16 7 14.6 7 12.5H4V5Zm10 0h6v6c0 4-2 6.5-5 7.5l-.7-1.6c1.9-.9 2.7-2.3 2.7-4.4h-3V5Z"/></svg></div>
+            <span class="svc-desc">AI agents reply, qualify and rebook within minutes over email, SMS and WhatsApp, so no lead goes cold.</span>
+          </li>
+          <li class="svc-item" tabindex="0">
+            <div class="svc"><small>(04)</small><strong>CRM, Tracking and Reporting</strong><svg class="q" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M4 5h6v6c0 4-2 6.5-5 7.5l-.7-1.6C6.2 16 7 14.6 7 12.5H4V5Zm10 0h6v6c0 4-2 6.5-5 7.5l-.7-1.6c1.9-.9 2.7-2.3 2.7-4.4h-3V5Z"/></svg></div>
+            <span class="svc-desc">Every lead traced from first touch to closed deal, with a live dashboard your finance team will trust.</span>
+          </li>
+        </ul>
+        <div class="svc-cta" data-reveal style="--rd:.2s">
+          <span>Want it running in two weeks?</span>
+          <a class="btn btn-white" href="#book">Book a Call <span class="go"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 4 4-4 4M8.5 4l4 4-4 4"/></svg></span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== PROCESS ============================== -->
+    <section class="dotgrid process" aria-labelledby="process-title">
+      <div class="wrap">
+        <div class="process-head" data-reveal>
+          <h2 class="h3" id="process-title" data-split>From First Call<br />To Full Calendar</h2>
+          <p class="bullet">No six-month onboarding. You'll see your first booked calls inside the first month.</p>
+        </div>
+        <div class="steps">
+          <span class="ping" style="left:0" aria-hidden="true"></span>
+          <article class="step" data-reveal>
+            <small>Week 1</small>
+            <h3>Audit and offer</h3>
+            <p>We dig into your numbers, sharpen the offer and map the exact buyers worth reaching.</p>
+          </article>
+          <article class="step" data-reveal style="--rd:.1s">
+            <small>Weeks 2 to 3</small>
+            <h3>Launch every channel</h3>
+            <p>Ads, outbound and AI follow-ups go live together, all feeding one calendar and one CRM.</p>
+          </article>
+          <article class="step" data-reveal style="--rd:.2s">
+            <small>Day 30 onwards</small>
+            <h3>Optimise and scale</h3>
+            <p>Weekly reporting on booked calls and cost per call, with budget moved to whatever is winning.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== NUMBERS ============================== -->
+    <section class="results" aria-labelledby="numbers-title">
+      <div class="wrap numbers">
+        <div class="numbers-head" data-reveal>
+          <h2 class="h3" id="numbers-title" data-split>The numbers our clients actually care about</h2>
+          <div><a class="btn btn-black" href="#book">Get Numbers Like These <span class="go"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 4 4-4 4M8.5 4l4 4-4 4"/></svg></span></a></div>
+        </div>
+        <div class="ngrid" data-reveal style="--rd:.1s">
+          <div class="ncell"><span class="label">Booked Calls</span><b data-count>1,200+</b><p>Qualified sales calls booked for clients last year</p></div>
+          <div class="ncell"><span class="label">Cost per Lead</span><b data-count>−46%</b><p>Average drop in cost per lead after 90 days</p></div>
+          <div class="ncell"><span class="label">Show-up Rate</span><b data-count>81%</b><p>Average show rate once AI reminders are live</p></div>
+          <div class="ncell"><span class="label">Revenue</span><b data-count>£12m</b><p>Pipeline revenue influenced across client accounts</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== TESTIMONIALS ============================== -->
+    <section class="voices" aria-labelledby="voices-title">
+      <div class="wrap">
+        <div class="quote-card" data-carousel data-reveal>
+          <div class="quote-top">
+            <div class="quote-title">
+              <svg class="quote-mark" viewBox="0 0 48 40" aria-hidden="true"><path d="M0 40V24C0 10 6 2 18 0l2 5c-6 2-9 6-9.5 12H20v23H0Zm28 0V24c0-14 6-22 18-24l2 5c-6 2-9 6-9.5 12H48v23H28Z"/></svg>
+              <h2 class="h3" id="voices-title" data-split>Don't Take<br />Our Word For It</h2>
+            </div>
+            <div class="arrows">
+              <button type="button" data-prev aria-label="Previous testimonial"><svg viewBox="0 0 16 16"><path d="M13 8H3m4-4L3 8l4 4"/></svg></button>
+              <button type="button" data-next aria-label="Next testimonial"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+            </div>
+          </div>
+          <div class="slides" aria-live="polite">
+            <div class="slide quote-body on">
+              <div class="person"><span class="avatar">DO</span><div><b>Daniel Okafor</b><span>Founder, Brightpath Consulting</span></div></div>
+              <p class="quote-text">“Campaigns were live in twelve days and we booked 34 qualified calls in the first month. We'd tried two agencies before; neither got close. The reporting shows exactly where every call came from.”</p>
+            </div>
+            <div class="slide quote-body">
+              <div class="person"><span class="avatar">PR</span><div><b>Priya Raman</b><span>Head of Sales, Keystone SaaS</span></div></div>
+              <p class="quote-text">“The AI follow-ups are the quiet hero. Leads that used to go cold over a weekend now get a thoughtful reply in minutes. Our show-up rate jumped from 58% to 81%.”</p>
+            </div>
+            <div class="slide quote-body">
+              <div class="person"><span class="avatar">SM</span><div><b>Sarah Mitchell</b><span>Group Marketing Manager</span></div></div>
+              <p class="quote-text">“We went from a handful of calls a month to a calendar our sales team can barely keep up with. For the first time, growth feels planned rather than lucky.”</p>
+            </div>
+          </div>
+          <p class="count"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== GUARANTEE ============================== -->
+    <section class="guarantee" aria-labelledby="g-title">
+      <div class="wrap">
+        <div class="g-card" data-reveal>
+          <div class="badge dark" aria-hidden="true">
+            <svg class="ring" viewBox="0 0 132 132"><defs><path id="ring-g" d="M66 66m-52 0a52 52 0 1 1 104 0a52 52 0 1 1-104 0"/></defs><text><textPath href="#ring-g" textLength="326" lengthAdjust="spacing">60-day guarantee · risk free · </textPath></text></svg>
+            <svg class="spark" viewBox="0 0 100 100"><path d="M50 0C52 30 70 48 100 50 70 52 52 70 50 100 48 70 30 52 0 50 30 48 48 30 50 0Z"/></svg>
+          </div>
+          <div>
+            <h2 class="h3" id="g-title" data-split>30 Qualified Calls In 60 Days, Or We Work For Free</h2>
+            <p>If we haven't booked at least 30 qualified sales calls within 60 days of launch, we keep working at no cost until we do. You take on none of the risk.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== FAQ ============================== -->
+    <section class="faq" aria-labelledby="faq-title">
+      <div class="wrap">
+        <div data-reveal>
+          <h2 class="h3" id="faq-title">Questions,<br />Answered</h2>
+        </div>
+        <div class="faq-list" data-reveal style="--rd:.1s">
+          <details open>
+            <summary>Who is this a fit for?<i aria-hidden="true"></i></summary>
+            <p>B2B companies with a proven offer, a sales process that closes, and revenue of at least £30k a month. If you sell a high-ticket service or software to other businesses, you're in the right place.</p>
+          </details>
+          <details>
+            <summary>How fast will I see booked calls?<i aria-hidden="true"></i></summary>
+            <p>Most clients see their first qualified calls within 2 to 4 weeks of launch. Channels are live by the end of week three.</p>
+          </details>
+          <details>
+            <summary>Do I need to sign a long contract?<i aria-hidden="true"></i></summary>
+            <p>No. We work month to month after the first 60 days, backed by the guarantee above.</p>
+          </details>
+          <details>
+            <summary>What do you need from my team?<i aria-hidden="true"></i></summary>
+            <p>About two hours in week one to share your offer, customers and calendar. After that, show up to the calls we book.</p>
+          </details>
+          <details>
+            <summary>Is ad spend included?<i aria-hidden="true"></i></summary>
+            <p>Ad spend is paid directly to the platforms so you always own the accounts and the data. We'll recommend a starting budget on the audit call.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== CLOSING ============================== -->
+    <section class="cosmos closing" id="book" aria-labelledby="closing-title">
+      <div class="stars"></div>
+      <div class="arc" aria-hidden="true"></div>
+      <div class="wrap" data-reveal>
+        <span class="tag"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0C52 30 70 48 100 50 70 52 52 70 50 100 48 70 30 52 0 50 30 48 48 30 50 0Z"/></svg>We take on 4 new clients a month</span>
+        <h2 class="display" id="closing-title"><span class="ln">Ready To See</span><span class="ln c">What's Possible?</span></h2>
+        <p class="sub">Book your free pipeline audit. In 30 minutes we'll map where your next 30 qualified calls come from, whether you work with us or not.</p>
+        <a class="btn btn-white lg" href="#book">Book Your Free Pipeline Audit <span class="go"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 4 4-4 4M8.5 4l4 4-4 4"/></svg></span></a>
+        <p class="micro"><span>30-minute call</span><span>No contracts</span><span>Leave with a plan either way</span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <a class="brand" href="#">
+        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M8 3.5h13A3.5 3.5 0 0 1 24.5 7v13a3.5 3.5 0 0 1-3.5 3.5H3.5V8A4.5 4.5 0 0 1 8 3.5Z" stroke-linejoin="round"/><path d="M14 9v10M9 14h10" stroke-linecap="round"/></svg>
+        Novaleads
+      </a>
+      <nav aria-label="Footer"><a href="#">Privacy</a><a href="#">Terms</a><a href="mailto:hello@novaleads.co">hello@novaleads.co</a></nav>
+      <span>© <span data-year>2026</span> Novaleads Ltd.</span>
+    </div>
+  </footer>
+
+  <a class="sticky-cta" href="#book"><span class="lbl"><span class="dot" aria-hidden="true"></span>Free pipeline audit, 4 spots this month</span><span class="btn btn-white">Book a Call <span class="go"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 4 4-4 4M8.5 4l4 4-4 4"/></svg></span></span></a>
+
+  <script src="../../_shared/vendor/gsap/gsap.min.js"></script>
+  <script src="../../_shared/vendor/gsap/ScrollTrigger.min.js"></script>
+  <script src="../../_shared/vendor/gsap/SplitText.min.js"></script>
+  <script src="../../_shared/motion.js"></script>
+  <script src="../assets/theme.js"></script>
+</body>
+</html>

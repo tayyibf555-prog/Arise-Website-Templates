@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plume · Your Voice on LinkedIn Every Week</title>
+  <meta name="description" content="Watch how one 45-minute call a month becomes a month of LinkedIn posts and a newsletter that sound exactly like you." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/theme.css" />
+  <style>
+    .vnav { grid-template-columns: 1fr auto; }
+    .vhero { padding-bottom: 0; }
+    .sky {
+      border-radius: 0;
+      /* Bottom strip is empty space that melts into the page instead of a rounded edge */
+      --fade: clamp(130px, 15vw, 210px);
+      padding-bottom: var(--fade);
+      -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - var(--fade)), rgba(0, 0, 0, 0.5) calc(100% - var(--fade) * 0.45), transparent);
+      mask-image: linear-gradient(to bottom, #000 calc(100% - var(--fade)), rgba(0, 0, 0, 0.5) calc(100% - var(--fade) * 0.45), transparent);
+    }
+    .vhero .h1 { max-width: 18ch; }
+
+    /* VSL player */
+    .vsl { position: relative; max-width: 860px; margin: clamp(36px, 5vw, 52px) auto 0; }
+    .vsl-frame { padding: 8px; border-radius: 26px; background: rgba(255, 255, 255, 0.3); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6), 0 50px 100px -40px rgba(40, 50, 140, 0.6); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .vsl-screen { position: relative; isolation: isolate; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 19px; text-align: left; background: radial-gradient(60% 60% at 50% 45%, rgba(255, 255, 255, 0.55), transparent 70%), linear-gradient(160deg, #eef0fd, #dcdcf8 45%, #f1d6ea); }
+    .vsl-screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .vsl-screen .bloom { z-index: 0; }
+    .poster-ui { position: absolute; z-index: 1; pointer-events: none; }
+    .poster-ui.a { left: 6%; top: 12%; width: 34%; transform: rotate(-5deg); }
+    .poster-ui.b { right: 6%; bottom: 14%; width: 32%; transform: rotate(4deg); }
+    .poster-title { position: absolute; z-index: 1; left: 0; right: 0; bottom: 9%; text-align: center; color: var(--ink); font-weight: 300; font-size: clamp(16px, 2.2vw, 26px); letter-spacing: -0.02em; pointer-events: none; }
+    .poster-title small { display: block; margin-bottom: 4px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); }
+    .vsl-play { position: absolute; z-index: 2; inset: 0; display: grid; place-items: center; border: 0; background: none; }
+    .play-btn { position: relative; display: grid; place-items: center; width: clamp(64px, 8vw, 86px); height: clamp(64px, 8vw, 86px); border-radius: 50%; background: #fff; color: var(--blue); box-shadow: 0 20px 40px -14px rgba(40, 50, 140, 0.55); transition: transform 0.4s var(--ease); }
+    .play-btn svg { width: 30%; height: 30%; margin-left: 6%; fill: currentColor; }
+    .play-btn::after { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, 0.9); animation: pulse 2.4s var(--ease) infinite; }
+    @keyframes pulse { from { transform: scale(1); opacity: 1; } to { transform: scale(1.8); opacity: 0; } }
+    .vsl-play:hover .play-btn { transform: scale(1.06); }
+    .vchip { position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: 7px; padding: 6px 11px; border-radius: 999px; background: rgba(255, 255, 255, 0.85); color: var(--ink); font-size: 12px; font-weight: 600; pointer-events: none; box-shadow: 0 8px 20px -12px rgba(40, 50, 140, 0.4); }
+    .vchip svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .vchip.sound { top: 14px; left: 14px; }
+    .vchip.time { top: 14px; right: 14px; font-variant-numeric: tabular-nums; }
+    .vsl.playing .vchip, .vsl.playing .poster-ui, .vsl.playing .poster-title { display: none; }
+    .vsl > .tag { z-index: 3; }
+
+    .hero-cta { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: clamp(28px, 3.5vw, 40px); }
+    .micro { margin: 0; font-size: 12.5px; color: rgba(255, 255, 255, 0.86); }
+    .micro span + span::before { content: '·'; margin: 0 8px; opacity: 0.6; }
+    .proof { display: flex; align-items: center; gap: 10px; }
+    .proof .faces { display: flex; }
+    .proof .faces .av { margin-left: -7px; border: 2px solid rgba(255, 255, 255, 0.9); }
+    .proof .faces .av:first-child { margin-left: 0; }
+    .proof p { margin: 0; text-align: left; font-size: 12px; line-height: 1.35; color: rgba(255, 255, 255, 0.9); }
+
+    /* Pains */
+    .pains { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: clamp(32px, 4vw, 48px); text-align: left; }
+    .pain { padding: 22px; border-radius: 20px 20px 20px 6px; background: #fff; box-shadow: inset 0 0 0 1px var(--line), 0 20px 40px -32px rgba(40, 50, 140, 0.45); }
+    .pain p { margin: 0; font-size: 17px; line-height: 1.4; letter-spacing: -0.01em; }
+    .pain span { display: inline-block; margin-top: 12px; }
+
+    /* Offer */
+    .offer { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(24px, 4vw, 48px); align-items: center; margin-top: clamp(36px, 5vw, 52px); padding: clamp(24px, 4vw, 44px); border-radius: 28px; background: linear-gradient(180deg, #eef0fb, #f6f6fd); box-shadow: inset 0 0 0 1px var(--line); }
+    .offer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    .offer li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--muted); }
+    .offer li b { color: var(--ink); font-weight: 600; }
+    .offer li::before { content: ''; flex: none; width: 20px; height: 20px; margin-top: 2px; border-radius: 50%; background: var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.4 8.7 13l5.3-6' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat; }
+    .price { position: relative; overflow: hidden; isolation: isolate; padding: 28px; border-radius: 22px; text-align: center; color: #fff; background: linear-gradient(180deg, #8c9ded, #c9bdee 70%, #e6cbe7); box-shadow: 0 30px 60px -30px rgba(40, 50, 140, 0.55); }
+    .price .bloom { z-index: -1; }
+    .price small { font-size: 12.5px; opacity: 0.9; }
+    .price b { display: block; margin: 6px 0; font-weight: 300; font-size: 54px; letter-spacing: -0.04em; line-height: 1; }
+    .price p { margin: 0 0 20px; font-size: 13.5px; opacity: 0.92; }
+    .price .btn { width: 100%; }
+
+    /* Guarantee */
+    .guarantee { display: grid; grid-template-columns: auto 1fr; gap: 26px; align-items: center; max-width: 860px; margin: 0 auto; padding: clamp(22px, 3.5vw, 32px); border-radius: 24px; background: #fff; box-shadow: inset 0 0 0 1px var(--line), 0 24px 50px -36px rgba(40, 50, 140, 0.5); }
+    .seal { position: relative; width: 108px; height: 108px; display: grid; place-items: center; }
+    .seal svg { position: absolute; inset: -12px; width: calc(100% + 24px); height: calc(100% + 24px); filter: blur(1px); }
+    .seal span { position: relative; z-index: 1; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; text-align: center; background: #fff; color: var(--ink); font-size: 10px; font-weight: 700; line-height: 1.1; letter-spacing: 0.04em; box-shadow: 0 6px 16px -6px rgba(40, 50, 140, 0.4); }
+    .seal span b { display: block; font-size: 17px; font-weight: 800; color: var(--blue); }
+    .guarantee h2 { margin: 0; font-weight: 400; font-size: clamp(22px, 2.4vw, 30px); letter-spacing: -0.02em; line-height: 1.2; }
+    .guarantee p { margin: 8px 0 0; color: var(--muted); }
+
+    /* FAQ */
+    .faq { max-width: 780px; margin: clamp(32px, 4vw, 44px) auto 0; text-align: left; }
+    .faq details { border-bottom: 1px solid var(--line); }
+    .faq details:first-of-type { border-top: 1px solid var(--line); }
+    .faq summary { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 18px 0; cursor: pointer; list-style: none; font-size: 16px; font-weight: 600; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary i { position: relative; flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--blue-soft); transition: transform 0.35s var(--ease); }
+    .faq summary i::before, .faq summary i::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 1.6px; background: var(--blue); transform: translate(-50%, -50%); }
+    .faq summary i::after { transform: translate(-50%, -50%) rotate(90deg); }
+    .faq details[open] summary i { transform: rotate(45deg); }
+    .faq details p { margin: -4px 0 20px; color: var(--muted); max-width: 64ch; }
+
+    /* Sticky CTA */
+    .sticky-cta { position: fixed; left: 50%; bottom: 16px; z-index: 50; display: flex; align-items: center; gap: 14px; padding: 6px 6px 6px 18px; border-radius: 999px; background: rgba(255, 255, 255, 0.9); color: var(--ink); font-size: 13.5px; white-space: nowrap; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 20px 40px -14px rgba(40, 50, 140, 0.45), inset 0 0 0 1px var(--line); transform: translate(-50%, 160%); transition: transform 0.5s var(--ease); }
+    .sticky-cta.show { transform: translate(-50%, 0); }
+    .sticky-cta .btn { height: 36px; }
+
+    @media (max-width: 980px) {
+      .pains, .offer { grid-template-columns: 1fr; }
+      .poster-ui { display: none; }
+      .vsl > .tag { display: none; }
+    }
+    @media (max-width: 560px) {
+      .guarantee { grid-template-columns: 1fr; justify-items: start; }
+      .micro { display: flex; flex-direction: column; gap: 2px; text-align: center; }
+      .micro span + span::before { display: none; }
+      .vchip.time { display: none; }
+      .sticky-cta .lbl { display: none; }
+      .sticky-cta { padding: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================== SKY HERO + VSL ============================== -->
+  <header class="sky">
+    <svg class="bloom" style="width:520px;left:-170px;bottom:120px;--b:5px;transform:rotate(-18deg)" aria-hidden="true"><use href="#bloom"/></svg>
+    <svg class="bloom" style="width:470px;right:-150px;bottom:40px;--b:8px;transform:rotate(24deg)" aria-hidden="true"><use href="#bloom"/></svg>
+    <svg class="bloom" style="width:160px;right:14%;top:100px;--b:16px;--o:.55" aria-hidden="true"><use href="#bloom"/></svg>
+    <svg class="bloom" style="width:110px;left:13%;top:200px;--b:18px;--o:.45;transform:rotate(40deg)" aria-hidden="true"><use href="#bloom"/></svg>
+    <span class="dots" style="left:10%;right:10%;top:45%;bottom:0" aria-hidden="true"></span>
+
+    <nav class="wrap nav vnav" aria-label="Main">
+      <a class="mark" href="#"><svg viewBox="0 0 26 26" fill="currentColor" aria-hidden="true"><path d="M3 21c0-7 2.4-12.6 8-15.6l1.3 2.2C9.4 9.5 8.2 12 8 14.5h3.6V21H3Zm11 0c0-7 2.4-12.6 8-15.6l1.3 2.2c-2.9 1.9-4.1 4.4-4.3 6.9h3.6V21H14Z"/></svg>Plume</a>
+      <a class="btn white nav-end" href="#book" data-magnetic><span class="arr">↳</span> Book a call</a>
+    </nav>
+
+    <div class="wrap hero vhero">
+      <span class="eyebrow on-sky rise" style="--rd:.05s">Free 6-minute training</span>
+      <h1 class="h1" data-split="load" data-delay="0.15" style="margin-top:18px">Your voice on LinkedIn every week, without writing a word.</h1>
+      <p class="sub rise" style="--rd:.4s">Watch how one 45-minute call a month becomes a month of posts and a newsletter that sound exactly like you.</p>
+
+      <div class="vsl rise" style="--rd:.5s" data-vsl data-embed="">
+        <span class="tag" style="left:-8%;top:62%" data-float><i></i>Matching your voice</span>
+        <span class="tag" style="right:-7%;top:30%" data-float><i class="g"></i>Post approved</span>
+        <span class="tag" style="right:-4%;bottom:6%" data-float><i class="b"></i>Newsletter sent</span>
+        <div class="vsl-frame" data-grow>
+          <div class="vsl-screen">
+            <svg class="bloom" style="width:46%;left:-12%;bottom:-24%;--b:3px" aria-hidden="true"><use href="#bloom"/></svg>
+            <svg class="bloom" style="width:30%;right:-6%;top:-12%;--b:9px;--o:.7;transform:rotate(30deg)" aria-hidden="true"><use href="#bloom"/></svg>
+            <div class="ui poster-ui a">
+              <div class="ui-head"><b><span class="av">MA</span>Maya · Plume</b></div>
+              <div style="padding:0 14px 12px;color:#3d4262">Three drafts from Tuesday's call are ready ✍️</div>
+            </div>
+            <div class="ui poster-ui b">
+              <div class="row" style="padding-top:12px"><span class="radio on"></span><div class="t"><b>3 questions before any brief</b><small>Best hook</small></div></div>
+              <div class="row" style="padding-bottom:12px"><span class="radio"></span><div class="t"><b>Monday Notes #48</b><small>Drafting</small></div></div>
+            </div>
+            <div class="poster-title"><small>With Maya, founder of Plume</small>The 45-minute call that writes your month</div>
+            <span class="vchip sound"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 8v4h3l4 3.5v-11L6 8H3Z"/><path d="m13.5 7.5 4 5m0-5-4 5"/></svg>Click to watch with sound</span>
+            <span class="vchip time">06:24</span>
+            <button class="vsl-play" type="button" aria-label="Play video"><span class="play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17l14-8.5L6 3.5Z"/></svg></span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-cta rise" style="--rd:.65s">
+        <a class="btn white lg" href="#book" data-sticky-anchor data-magnetic><span class="arr">↳</span> Book your free voice call</a>
+        <p class="micro"><span>20 minutes</span><span>3 posts written for you</span><span>No obligation</span></p>
+        <div class="proof"><span class="faces"><span class="av">SL</span><span class="av b">DO</span><span class="av c">HC</span></span><p>★★★★★<br />Loved by 120+ founders and experts</p></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================== PAINS ============================== -->
+    <section class="wrap sec center" aria-labelledby="pain-title">
+      <span class="eyebrow">Sound familiar?</span>
+      <h2 class="h2" id="pain-title" data-split style="margin:16px auto 0;max-width:20ch">You're great at what you do. Posting about it? Less so.</h2>
+      <div class="pains" data-stagger>
+        <div class="pain"><p>“I post twice, get 11 likes, and quietly give up for three months.”</p><span class="pillmini p">Consistency</span></div>
+        <div class="pain"><p>“Everything I write sounds either boring or like a LinkedIn bro.”</p><span class="pillmini">Voice</span></div>
+        <div class="pain"><p>“I know I should email my list. I just never find the time.”</p><span class="pillmini g">Time</span></div>
+      </div>
+    </section>
+
+    <!-- ============================== WHY + STUDIO ============================== -->
+    <section class="wrap sec center" id="why" aria-labelledby="why-title">
+      <svg class="bloom" style="width:120px;right:5%;top:110px;--b:3px;transform:rotate(30deg);z-index:0" aria-hidden="true"><use href="#bloom"/></svg>
+      <span class="eyebrow">Why Plume</span>
+      <p class="statement" id="why-title" data-split>Founders spend up to 5 hours a week staring at a blank post. <span class="fade">Plume gives that time back and keeps you visible, quietly in the background.</span></p>
+      <div class="studio" data-grow>
+        <span class="dots ink" style="left:-40px;top:-40px;width:260px;height:220px" aria-hidden="true"></span>
+        <div class="ui side-card" style="transform:rotate(-3deg)" data-float>
+          <div class="ui-head" style="padding:0 0 8px"><b><span class="av">SM</span>Samantha Miller</b></div>
+          <p>Can we turn the award shortlist into a post? Keep it humble 🙏</p>
+          <span class="pillmini">Sent to Plume</span>
+        </div>
+
+        <div class="ui cal">
+          <div class="cal-main">
+            <div class="cal-top">✎ Planning your month…</div>
+            <div class="cal-month">September 2026 <span>‹ ›</span></div>
+            <div class="days">
+              <span class="dh">MON</span><span class="dh">TUE</span><span class="dh">WED</span><span class="dh">THU</span><span class="dh">FRI</span><span class="dh">SAT</span><span class="dh">SUN</span>
+              <span class="mute">31</span><span class="post">1</span><span>2</span><span class="post">3</span><span>4</span><span>5</span><span>6</span>
+              <span class="post">7</span><span>8</span><span class="post">9</span><span>10</span><span class="post">11</span><span>12</span><span>13</span>
+              <span>14</span><span class="post">15</span><span class="sel post">16</span><span class="post">17</span><span>18</span><span>19</span><span>20</span>
+              <span class="post">21</span><span>22</span><span class="post">23</span><span>24</span><span class="post">25</span><span>26</span><span>27</span>
+              <span>28</span><span class="post">29</span><span>30</span><span class="mute">1</span><span class="mute">2</span><span class="mute">3</span><span class="mute">4</span>
+            </div>
+          </div>
+          <div class="cal-side">
+            <div class="who"><span class="av">DO</span><span class="av b">MA</span><span class="av c">+2</span></div>
+            <h4>The shortlist, three years on</h4>
+            <p>LinkedIn post · est. reach 18k</p>
+            <p style="margin-top:4px;font-weight:600;color:var(--ink)">Wednesday</p>
+            <span class="slot on"><span>9:00 AM</span><span>Best</span></span>
+            <span class="slot"><span>12:30 PM</span><span>Good</span></span>
+            <span class="btn dark" style="height:30px;font-size:11px;margin-top:4px" data-say="Approved. It goes live Wednesday at 9:00.">↳ Approve with Plume</span>
+          </div>
+        </div>
+
+        <div class="stack">
+          <div class="ui side-card" data-float>
+            <div class="check"><i></i>Pulling quotes from your call</div>
+            <div class="check"><i></i>Matching your voice</div>
+            <div class="check wait"><i></i>Writing the hook…</div>
+          </div>
+          <span class="tag light"><i class="b"></i>Plume is writing…</span>
+          <span class="tag light"><i></i>Schedule post</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== HOW IT WORKS ============================== -->
+    <section class="wrap sec" id="how" aria-labelledby="how-title">
+      <span class="eyebrow">How it works</span>
+      <h2 class="h2" id="how-title" data-split style="margin-top:16px;max-width:18ch">Set your voice once. We'll handle the rest.</h2>
+      <div class="flow" data-tabs>
+        <div class="steps-list" role="tablist" aria-label="How it works">
+          <button type="button" role="tab" aria-selected="true">Book your monthly call</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1">Plume learns your voice</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1">Drafts land in your inbox</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1">Approve in one tap</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1">Posts go live, you get a report</button>
+        </div>
+        <div class="panes">
+          <div class="pane on" role="tabpanel">
+            <p>Once a month we interview you for 45 minutes. Stories, opinions, wins and rants: all of it becomes material.</p>
+            <div class="ui">
+              <div class="ui-head"><b>This month's call</b><small>Tue 14:00 · 45 min</small></div>
+              <div class="row"><div class="t"><b>Topics covered</b><small>Pricing, hiring, the award shortlist</small></div></div>
+              <div class="row"><div class="t"><b>Stories captured</b></div><span class="pillmini">12</span></div>
+              <div class="row"><div class="t"><b>Quotes pulled</b></div><span class="pillmini">31</span></div>
+              <div class="row" style="padding-bottom:14px"><div class="t"><b>Post ideas</b></div><span class="pillmini g">18</span></div>
+            </div>
+          </div>
+          <div class="pane" role="tabpanel">
+            <p>We build a living voice guide from your calls, old posts and messages, so every draft sounds like you on a good day.</p>
+            <div class="ui">
+              <div class="ui-head"><b>Your voice guide</b><small>Updated monthly</small></div>
+              <div class="row"><div class="t"><b>Short, punchy openers</b><small>Never start with “I'm excited to…”</small></div><span class="toggle-sw on"></span></div>
+              <div class="row"><div class="t"><b>British spelling</b></div><span class="toggle-sw on"></span></div>
+              <div class="row"><div class="t"><b>Hashtags</b></div><span class="toggle-sw"></span></div>
+              <div class="row"><div class="t"><b>Emoji</b><small>Sparingly</small></div><span class="meter"><i style="width:25%"></i></span></div>
+              <div class="row" style="padding-bottom:14px"><div class="t"><b>Tone</b><small>Warm, direct, a bit cheeky</small></div></div>
+            </div>
+          </div>
+          <div class="pane" role="tabpanel">
+            <p>Within five days, a week's worth of posts and your next newsletter arrive, ready to review.</p>
+            <div class="ui">
+              <div class="ui-head"><b>Drafts for you</b><small>3 ready · 1 in progress</small></div>
+              <div class="row"><span class="av">1</span><div class="t"><b>The client I said no to</b><small>LinkedIn · 212 words</small></div><span class="pillmini g">Ready</span></div>
+              <div class="row"><span class="av b">2</span><div class="t"><b>3 questions before any brief</b><small>LinkedIn · 164 words</small></div><span class="pillmini g">Ready</span></div>
+              <div class="row"><span class="av c">3</span><div class="t"><b>What hiring taught me in year two</b><small>LinkedIn · 190 words</small></div><span class="pillmini g">Ready</span></div>
+              <div class="row" style="padding-bottom:14px"><span class="av">✉</span><div class="t"><b>Monday Notes #48</b><small>Newsletter · 620 words</small></div><span class="pillmini p">Drafting</span></div>
+            </div>
+          </div>
+          <div class="pane" role="tabpanel">
+            <p>Approve, tweak a line or ask for a rewrite from your phone. Most clients spend 15 minutes a week here.</p>
+            <div class="ui">
+              <div class="ui-head"><b>3 questions before any brief</b><small>Draft 2 of 3</small></div>
+              <div style="padding:2px 14px 12px;font-size:12.5px;color:#3d4262;line-height:1.6">Three years ago I'd say yes to any brief with a budget.<br />Now every project has to pass three questions first.<br />The third one has saved me £40k this year 👇</div>
+              <div class="row" style="padding-bottom:14px;gap:8px"><span class="btn soft" style="height:30px;font-size:11.5px;flex:1">Suggest an edit</span><span class="btn dark" style="height:30px;font-size:11.5px;flex:1" data-say="Approved. Scheduled for Tuesday 9:00.">Approve</span></div>
+            </div>
+          </div>
+          <div class="pane" role="tabpanel">
+            <p>We schedule everything and send a monthly report on what landed, what didn't and what we'll try next.</p>
+            <div class="ui">
+              <div class="ui-head"><b>September report</b><small>vs August</small></div>
+              <div class="row"><div class="t"><b>Impressions</b><small>184k</small></div><span class="meter"><i style="width:82%"></i></span></div>
+              <div class="row"><div class="t"><b>Profile views</b><small>+212%</small></div><span class="meter"><i style="width:68%"></i></span></div>
+              <div class="row"><div class="t"><b>Newsletter open rate</b><small>58%</small></div><span class="meter"><i style="width:58%"></i></span></div>
+              <div class="row" style="padding-bottom:14px"><div class="t"><b>Inbound enquiries</b><small>9 this month</small></div><span class="pillmini g">+6</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== OFFER ============================== -->
+    <section class="wrap sec" id="pricing" aria-labelledby="offer-title">
+      <div class="center">
+        <span class="eyebrow">What you get</span>
+        <h2 class="h2" id="offer-title" data-split style="margin:16px auto 0;max-width:18ch">Everything it takes to stay visible</h2>
+      </div>
+      <div class="offer">
+        <ul data-stagger>
+          <li><span><b>12 to 20 LinkedIn posts a month</b>, written in your voice and scheduled for you</span></li>
+          <li><span><b>A weekly or fortnightly newsletter</b> that turns readers into enquiries</span></li>
+          <li><span><b>One 45-minute voice call a month.</b> The only thing we need from you</span></li>
+          <li><span><b>A living voice guide</b> so every draft sounds like you on a good day</span></li>
+          <li><span><b>A monthly report</b> on what landed and what we'll try next</span></li>
+        </ul>
+        <div class="price" data-grow>
+          <svg class="bloom" style="width:220px;right:-70px;bottom:-70px;--b:4px" aria-hidden="true"><use href="#bloom"/></svg>
+          <small>Plans from</small>
+          <b>£1,450</b>
+          <p>per month · no long contract<br />first month approved by you before anything goes live</p>
+          <a class="btn white" href="#book"><span class="arr">↳</span> Book your free voice call</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== TESTIMONIALS ============================== -->
+    <section class="wrap" id="stories" aria-labelledby="stories-title">
+      <div class="praise">
+        <svg class="bloom" style="width:360px;left:-120px;bottom:-120px;--b:6px;transform:rotate(-12deg)" aria-hidden="true"><use href="#bloom"/></svg>
+        <svg class="bloom" style="width:300px;right:-90px;top:-80px;--b:10px;transform:rotate(30deg)" aria-hidden="true"><use href="#bloom"/></svg>
+        <span class="dots" style="left:20%;right:20%;top:30%;bottom:0" aria-hidden="true"></span>
+        <span class="eyebrow on-sky">Testimonials</span>
+        <h2 class="h2" id="stories-title">A little less writing. A lot more reach.</h2>
+        <div class="quote-wrap" data-quotes>
+          <div class="qcard">
+            <div class="l">
+              <span class="brand" data-brand>BRIGHTPATH</span>
+              <div><b data-stat>3.4x</b><small data-stat-label>More profile views</small></div>
+            </div>
+            <div class="r">
+              <div class="qslides" aria-live="polite">
+                <div class="qslide on" data-stat="3.4x" data-label="More profile views" data-brand="BRIGHTPATH">
+                  <div class="who"><span class="av b">DO</span><div><b>Daniel Okafor</b><small>Founder, Brightpath</small></div></div>
+                  <p>Plume has completely changed how I show up online. <span class="fade">I post every week without writing a word, it sounds exactly like me, and three new clients this quarter came straight from LinkedIn.</span></p>
+                </div>
+                <div class="qslide" data-stat="61%" data-label="Newsletter open rate" data-brand="KILN &amp; CO.">
+                  <div class="who"><span class="av c">JB</span><div><b>James Bell</b><small>Founder, Kiln &amp; Co.</small></div></div>
+                  <p>Our newsletter went from 22% to 61% open rate. <span class="fade">People reply to it now. Actual humans, telling us what they want to buy next.</span></p>
+                </div>
+                <div class="qslide" data-stat="4" data-label="Speaking invites this quarter" data-brand="NWOSU COACHING">
+                  <div class="who"><span class="av">AN</span><div><b>Amara Nwosu</b><small>Executive coach</small></div></div>
+                  <p>I finally have a body of work people can point to. <span class="fade">Speaking invitations went from zero to four in a single quarter.</span></p>
+                </div>
+              </div>
+              <div class="qarrows">
+                <button type="button" data-prev aria-label="Previous testimonial"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg></button>
+                <button type="button" data-next aria-label="Next testimonial"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== GUARANTEE + FAQ ============================== -->
+    <section class="wrap sec center" aria-labelledby="faq-title">
+      <div class="guarantee" data-grow>
+        <div class="seal"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#bloom"/></svg><span><span><b>100%</b>LOVE IT</span></span></div>
+        <div style="text-align:left">
+          <h2>Love your first month of posts, or you don't pay.</h2>
+          <p>If the drafts don't sound like you, we rewrite them until they do. Still not right? Full refund, no awkward conversation.</p>
+        </div>
+      </div>
+
+      <span class="eyebrow" style="margin-top:clamp(64px,8vw,100px)">Questions</span>
+      <h2 class="h2" id="faq-title" data-split style="margin-top:16px">Before you book</h2>
+      <div class="faq">
+        <details open><summary>Will it really sound like me?<i aria-hidden="true"></i></summary><p>That's the whole job. We study your calls, past posts and messages, build a voice guide, and every draft goes to you for approval first.</p></details>
+        <details><summary>How much of my time does it take?<i aria-hidden="true"></i></summary><p>One 45-minute call a month, plus about 15 minutes a week to approve drafts. Most clients approve from their phone.</p></details>
+        <details><summary>Do you use AI to write?<i aria-hidden="true"></i></summary><p>We use AI for research and transcripts. Every post is written and edited by a human writer who knows your voice.</p></details>
+        <details><summary>Do I have to sign a long contract?<i aria-hidden="true"></i></summary><p>No. Plans run month to month after the first month, backed by the guarantee above.</p></details>
+        <details><summary>What if I already have a content team?<i aria-hidden="true"></i></summary><p>We often work alongside in-house teams on the founder's personal channels, where the voice has to be yours.</p></details>
+      </div>
+    </section>
+
+    <!-- ============================== FINAL CTA ============================== -->
+    <section class="handled" id="book" data-sticky-end aria-labelledby="cta-title">
+      <span class="dots ink" style="left:25%;right:25%;top:10%;bottom:10%" aria-hidden="true"></span>
+      <svg class="bloom" style="width:70px;left:16%;top:22%;--b:1px;transform:rotate(20deg)" aria-hidden="true"><use href="#bloom"/></svg>
+      <svg class="bloom" style="width:54px;right:20%;bottom:24%;--b:2px;transform:rotate(-30deg)" aria-hidden="true"><use href="#bloom"/></svg>
+      <div class="float" style="left:18%;top:36%" data-float><span class="av b">DO</span></div>
+      <div class="float" style="left:12%;top:48%" data-float><span class="tag light"><i class="g"></i>Post approved</span></div>
+      <div class="float" style="right:16%;top:24%" data-float><span class="av c">JB</span></div>
+      <div class="float hide-sm" style="right:10%;top:34%" data-float><span class="tag light"><i class="b"></i>Draft ready</span></div>
+      <div class="float hide-sm" style="left:24%;bottom:18%" data-float><span class="tag light"><i></i>Voice matched</span></div>
+      <div class="float hide-sm" style="right:24%;bottom:16%" data-float><span class="av">AN</span></div>
+      <div class="float hide-sm" style="right:12%;bottom:30%" data-float><span class="tag light"><i class="g"></i>Newsletter sent</span></div>
+      <div class="wrap" style="position:relative;z-index:3">
+        <h2 class="h2" id="cta-title" data-split>Your next post is already written.</h2>
+        <p>Book a free 20-minute voice call. We'll look at your profile together and write three posts you could publish this week.</p>
+        <a class="btn dark lg" href="mailto:hello@plume.studio" data-magnetic><span class="arr">↳</span> Book your free voice call</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap foot-base" style="margin-top:0">
+      <a class="mark" href="#" style="color:var(--blue)"><svg viewBox="0 0 26 26" fill="currentColor" aria-hidden="true"><path d="M3 21c0-7 2.4-12.6 8-15.6l1.3 2.2C9.4 9.5 8.2 12 8 14.5h3.6V21H3Zm11 0c0-7 2.4-12.6 8-15.6l1.3 2.2c-2.9 1.9-4.1 4.4-4.3 6.9h3.6V21H14Z"/></svg>Plume</a>
+      <span><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="mailto:hello@plume.studio">hello@plume.studio</a></span>
+      <span>© <span data-year>2026</span> Plume Studio Ltd.</span>
+    </div>
+  </footer>
+
+  <a class="sticky-cta" href="#book"><span class="lbl">Free 20-minute voice call · 3 posts written for you</span><span class="btn dark"><span class="arr">↳</span> Book now</span></a>
+
+  <script src="../../_shared/vendor/gsap/gsap.min.js"></script>
+  <script src="../../_shared/vendor/gsap/ScrollTrigger.min.js"></script>
+  <script src="../../_shared/vendor/gsap/SplitText.min.js"></script>
+  <script src="../assets/theme.js"></script>
+  <script src="../../_shared/motion.js"></script>
+</body>
+</html>
