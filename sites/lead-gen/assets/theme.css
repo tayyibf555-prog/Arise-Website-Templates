@@ -503,3 +503,9 @@ img, svg { display: block; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   html { scroll-behavior: auto; }
 }
+
+/* ------------------------------------------------------------------ */
+/* Testimonial bar                                                     */
+/* ------------------------------------------------------------------ */
+.tbar { --tb-bg: #fff; --tb-card: #f5f6fa; --tb-text: #0c0c11; --tb-muted: #8f909c; --tb-accent: #2d5bff; --tb-border: rgba(12, 12, 17, 0.06); --tb-radius: 18px; --tb-av: linear-gradient(135deg, #5a63ff, #1a1fb8); --tb-title-weight: 400; }
+.tbar .tbar-title { font-size: clamp(30px, 3.4vw, 46px); letter-spacing: -0.045em; }

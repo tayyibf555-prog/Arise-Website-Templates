@@ -2,18 +2,19 @@
 
 A showroom of agency website templates. `index.html` shows a live preview of every site; click one to open it.
 
-Five agency offers, each with two variants:
+Five agency offers, each with three pages:
 
-| Offer | `vsl` | `site` |
-|---|---|---|
-| AEO Agency | `sites/aeo/vsl/` | `sites/aeo/site/` |
-| AI Website Agency | `sites/ai-website/vsl/` | `sites/ai-website/site/` |
-| AI Solution Agency | `sites/ai-solution/vsl/` | `sites/ai-solution/site/` |
-| Copywriting Agency | `sites/copywriting/vsl/` | `sites/copywriting/site/` |
-| AI Lead Gen Agency | `sites/lead-gen/vsl/` | `sites/lead-gen/site/` |
+| Offer | `vsl` | `site` | `thank-you` |
+|---|---|---|---|
+| AEO Agency | `sites/aeo/vsl/` | `sites/aeo/site/` | `sites/aeo/thank-you/` |
+| AI Website Agency | `sites/ai-website/vsl/` | `sites/ai-website/site/` | `sites/ai-website/thank-you/` |
+| AI Solution Agency | `sites/ai-solution/vsl/` | `sites/ai-solution/site/` | `sites/ai-solution/thank-you/` |
+| Copywriting Agency | `sites/copywriting/vsl/` | `sites/copywriting/site/` | `sites/copywriting/thank-you/` |
+| AI Lead Gen Agency | `sites/lead-gen/vsl/` | `sites/lead-gen/site/` | `sites/lead-gen/thank-you/` |
 
 - **vsl**: sales page built around a video sales letter
 - **site**: standard agency website, no VSL
+- **thank-you**: post-booking page: accept the calendar invite, then client results. Point your booking tool's redirect here.
 
 ## Run locally
 
@@ -28,7 +29,10 @@ Then open http://localhost:4321.
 ## Structure
 
 - `sites/registry.js`: the list of offers shown on the index page
-- `sites/<offer>/assets/`: styles and scripts shared by that offer's two pages
+- `sites/<offer>/assets/`: styles and scripts shared by that offer's pages
+- `sites/<offer>/assets/testimonials.js`: that offer's client testimonials, used by the scrolling bar and the thank-you page
+- `sites/_shared/testimonials.css` / `testimonials.js`: the horizontally scrolling testimonial bar
+- `sites/_shared/thankyou.css`: shared thank-you page layout, themed per offer
 - `sites/_shared/silk.js`: WebGL silk and ridge backgrounds (`<canvas data-silk="crimson">`)
 - `sites/_shared/motion.js`: GSAP animations via data attributes (`data-split`, `data-count`, `data-rotate`, `data-stagger`, …)
 - `sites/_shared/vendor/gsap/`: GSAP 3.15

@@ -15,7 +15,23 @@
     }
     main { max-width: 1280px; margin: 0 auto; }
     h1 { margin: 0 0 40px; font-size: 32px; letter-spacing: -0.02em; }
-    h2 { margin: 48px 0 16px; font-size: 20px; letter-spacing: -0.01em; }
+    .row-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin: 48px 0 16px; }
+    h2 { margin: 0; font-size: 20px; letter-spacing: -0.01em; }
+    .ty-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 36px;
+      padding: 0 16px;
+      border-radius: 999px;
+      background: #111;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .ty-link:hover { background: #333; }
     .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
     a.card { display: block; color: inherit; text-decoration: none; }
     .preview {
@@ -57,8 +73,15 @@
     const W = 1440;
 
     for (const agency of window.ARISE_REGISTRY) {
+      const head = document.createElement('div');
+      head.className = 'row-head';
       const h2 = document.createElement('h2');
       h2.textContent = agency.name;
+      const ty = document.createElement('a');
+      ty.className = 'ty-link';
+      ty.href = `sites/${agency.slug}/thank-you/`;
+      ty.textContent = 'View thank-you page →';
+      head.append(h2, ty);
       const grid = document.createElement('div');
       grid.className = 'grid';
 
@@ -92,7 +115,7 @@
         card.append(preview, name);
         grid.append(card);
       }
-      list.append(h2, grid);
+      list.append(head, grid);
     }
 
     // Scale each 1440px-wide page down to fit its card.

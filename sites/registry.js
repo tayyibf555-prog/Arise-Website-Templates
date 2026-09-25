@@ -3,8 +3,10 @@
 
   To add a site: put its files in the variant's folder (e.g. sites/aeo/vsl/index.html).
   Each agency has two variants:
-    vsl  → sales page built around a video sales letter
-    site → normal agency website, no VSL
+    vsl       → sales page built around a video sales letter
+    site      → normal agency website, no VSL
+    thank-you → post-booking page (accept the calendar invite + client results),
+                linked from the index with its own button rather than a preview
 */
 window.ARISE_VARIANTS = {
   vsl: 'VSL sales page',

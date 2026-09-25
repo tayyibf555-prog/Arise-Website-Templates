@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>You're booked · Novaleads</title>
+  <meta name="robots" content="noindex" />
+  <meta name="description" content="Your call with Novaleads is booked. Two quick steps before we speak." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../_shared/thankyou.css" />
+  <link rel="stylesheet" href="../../_shared/testimonials.css" />
+  <style>
+    body.ty {
+      font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+      --ty-bg: #000;
+      --ty-text: #fff;
+      --ty-muted: rgba(210, 212, 230, 0.66);
+      --ty-card: rgba(255, 255, 255, 0.035);
+      --ty-card-2: rgba(255, 255, 255, 0.05);
+      --ty-border: rgba(255, 255, 255, 0.12);
+      --ty-accent: #fff;
+      --ty-accent-text: #0c0c11;
+      --ty-result: #98a4ff;
+      --ty-glow-c: rgba(120, 130, 255, 0.85);
+      --ty-radius: 20px;
+      --ty-btn-radius: 999px;
+      --ty-h1-weight: 400;
+      --ty-h2-weight: 500;
+    }
+    .ty-top { background: radial-gradient(38% 34% at 0% 0%, rgba(236, 238, 255, 0.9), rgba(160, 168, 255, 0.45) 45%, transparent 100%), radial-gradient(130% 115% at -8% -14%, #6b76ff 0%, #3544f5 14%, #2432dc 26%, #1a24b4 38%, #111882 50%, #0a0e52 61%, #04052a 72%, #010108 84%, #000 92%); }
+    .ty-top::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.6; background-image: radial-gradient(1px 1px at 12% 18%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 58% 24%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 88% 12%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 34% 62%, rgba(255,255,255,.8) 50%, transparent 51%), radial-gradient(1px 1px at 76% 48%, rgba(255,255,255,.7) 50%, transparent 51%); background-size: 420px 380px; }
+    .ty-hero h1 { letter-spacing: -0.055em; }
+  </style>
+</head>
+<body class="ty">
+
+  <!-- ============================== TOP ============================== -->
+  <header class="ty-top">
+    <nav class="ty-nav" aria-label="Main">
+      <a class="ty-brand" href="../site/"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M8 3.5h13A3.5 3.5 0 0 1 24.5 7v13a3.5 3.5 0 0 1-3.5 3.5H3.5V8A4.5 4.5 0 0 1 8 3.5Z" stroke-linejoin="round"/><path d="M14 9v10M9 14h10" stroke-linecap="round"/></svg><span style="text-transform:uppercase;font-weight:700;font-size:14px">Novaleads</span></a>
+      <div class="ty-links"><a href="#results">Client results</a><a class="ty-btn" href="../site/">Back to site</a></div>
+    </nav>
+    <div class="ty-hero">
+      <span class="ty-pill"><i aria-hidden="true"></i>Your call is booked</span>
+      <h1>You're not done yet <span>(please read below)</span></h1>
+      <p>Two quick steps before we speak, so we can make the most of your time on the call.</p>
+    </div>
+  </header>
+
+  <main class="ty-steps">
+    <!-- STEP 1: accept the calendar invite -->
+    <section class="ty-step" aria-labelledby="step-1">
+      <div class="ty-step-head"><span class="ty-badge">STEP 1</span><h2 id="step-1">Accept the calendar invite</h2></div>
+      <p>Check your email and click <b>'Yes'</b> to accept the Google Calendar invite we've sent for our upcoming call. It holds your slot and sends you a reminder.</p>
+      <div class="invite" data-circle aria-label="Example Google Calendar invitation with the Yes button circled">
+        <div class="invite-subject">Invitation: Novaleads × You: Pipeline audit @ Tue 30 Sep 2026 2pm – 2:30pm (BST)</div>
+        <div class="invite-card">
+          <div class="invite-when">Tuesday 30 September · 2:00 – 2:30pm</div>
+          <div class="invite-title">Novaleads × You: Pipeline audit</div>
+          <div class="invite-row"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 18s6-5.4 6-10a6 6 0 0 0-12 0c0 4.6 6 10 6 10Z"/><circle cx="10" cy="8" r="2.2"/></svg><span>Google Meet (joining link in the description)</span></div>
+          <div class="invite-row"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="7.5" cy="7" r="2.8"/><path d="M2.5 16c.6-2.8 2.6-4.3 5-4.3s4.4 1.5 5 4.3"/><circle cx="14" cy="7.5" r="2.2"/><path d="M13.2 11.7c2.2.1 3.7 1.5 4.3 4"/></svg><span>hello@novaleads.co <em>– Organiser</em></span></div>
+          <div class="invite-row"><svg class="gcal" viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="2" width="16" height="16" rx="2.5" fill="#fff" stroke="#dadce0"/><path d="M2 6.5h16" stroke="#4285f4" stroke-width="3"/><rect x="6" y="9.5" width="3" height="3" fill="#34a853"/><rect x="11" y="9.5" width="3" height="3" fill="#fbbc04"/><rect x="6" y="13.5" width="3" height="2" fill="#ea4335"/></svg><span><b style="font-weight:500;color:#1f1f1f">On your Google Calendar</b><br />No other events on this day</span></div>
+          <div class="invite-actions" aria-hidden="true">
+            <span>Yes<svg class="circle" viewBox="0 0 120 60" preserveAspectRatio="none"><path pathLength="1" d="M74 5C36 1 4 12 5 31c1 20 50 27 88 20 24-5 26-30 4-41C82 3 64 3 46 7"/></svg></span>
+            <span>No</span><span>Maybe</span><span class="light">Directions</span><span class="light more">⋮</span>
+          </div>
+        </div>
+      </div>
+      <p class="ty-note">Can't find it? Check your spam or promotions folder, or email <a href="mailto:hello@novaleads.co">hello@novaleads.co</a> and we'll resend it.</p>
+    </section>
+
+    <!-- STEP 2: client results -->
+    <section class="ty-step" id="results" aria-labelledby="step-2">
+      <div class="ty-step-head"><span class="ty-badge">STEP 2</span><h2 id="step-2">See what our clients got</h2></div>
+      <p>Real results from people who were exactly where you are now.</p>
+      <div class="ty-grid" data-tgrid="4"></div>
+    </section>
+
+    <!-- STEP 3: more wins, scrolling -->
+    <section class="ty-step" aria-labelledby="step-3">
+      <div class="ty-step-head"><span class="ty-badge">STEP 3</span><h2 id="step-3">More client wins</h2></div>
+      <div class="tbar" data-tbar><div class="tbar-viewport"><div class="tbar-track"></div></div></div>
+    </section>
+  </main>
+
+  <footer class="ty-foot">© 2026 Novaleads Ltd · <a href="../site/">Back to site</a></footer>
+
+  <script src="../assets/testimonials.js"></script>
+  <script src="../../_shared/testimonials.js"></script>
+</body>
+</html>

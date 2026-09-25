@@ -280,3 +280,11 @@ img, svg { display: block; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   html { scroll-behavior: auto; }
 }
+
+/* ------------------------------------------------------------------ */
+/* Testimonial bar                                                     */
+/* ------------------------------------------------------------------ */
+.tbar { --tb-card: #fff; --tb-text: var(--ink); --tb-muted: var(--muted); --tb-accent: var(--blue); --tb-border: var(--line); --tb-radius: 20px; --tb-av: linear-gradient(135deg, #f29db9, #b9a5f2); --tb-title-weight: 300; --tb-pad: clamp(80px, 10vw, 130px) 0 0; }
+.tbar .tcard { box-shadow: 0 20px 40px -32px rgba(40, 50, 140, 0.45); }
+.tbar .tbar-title { font-size: clamp(30px, 3.6vw, 48px); letter-spacing: -0.03em; }
+.tbar .tbar-kicker { color: var(--blue); letter-spacing: 0.04em; text-transform: none; font-weight: 600; }

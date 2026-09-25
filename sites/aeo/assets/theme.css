@@ -296,3 +296,9 @@ main { position: relative; z-index: 1; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   html { scroll-behavior: auto; }
 }
+
+/* ------------------------------------------------------------------ */
+/* Testimonial bar                                                     */
+/* ------------------------------------------------------------------ */
+.tbar { --tb-bg: #fff; --tb-card: var(--soft); --tb-text: var(--text); --tb-muted: var(--grey); --tb-accent: var(--text); --tb-border: transparent; --tb-radius: 2px; --tb-av: linear-gradient(145deg, #d9d9dc, #7c7c82); --tb-av-text: #111; --tb-pad: clamp(72px, 9vw, 128px) 0 0; }
+.tbar .tbar-kicker { letter-spacing: 0; text-transform: none; font-size: 11px; }

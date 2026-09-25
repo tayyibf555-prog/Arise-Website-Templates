@@ -648,3 +648,11 @@ body.has-sticky .toast { bottom: 96px; }
   html { scroll-behavior: auto; }
   .js [data-reveal] { opacity: 1; transform: none; }
 }
+
+/* ------------------------------------------------------------------ */
+/* Testimonial bar                                                     */
+/* ------------------------------------------------------------------ */
+.tbar { --tb-bg: #fff; --tb-card: #f2f2f2; --tb-text: var(--ink); --tb-muted: #6d6d6d; --tb-accent: var(--red); --tb-border: transparent; --tb-radius: 4px; --tb-av: var(--red); }
+.tbar .tbar-kicker { font-family: var(--mono); color: var(--red); letter-spacing: 0.06em; }
+.tbar .tbar-kicker::before { content: '■ '; }
+.tbar .tbar-title { letter-spacing: -0.045em; }

@@ -352,3 +352,10 @@ em.ac { font-style: italic; color: var(--blue); font-weight: 400; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   html { scroll-behavior: auto; }
 }
+
+/* ------------------------------------------------------------------ */
+/* Testimonial bar (sits in the dark navy section)                     */
+/* ------------------------------------------------------------------ */
+.tbar { --tb-card: rgba(22, 38, 78, 0.55); --tb-text: rgba(230, 236, 255, 0.92); --tb-muted: rgba(200, 212, 255, 0.6); --tb-accent: #7fa2ff; --tb-border: rgba(140, 170, 255, 0.14); --tb-radius: 14px; --tb-av: linear-gradient(135deg, #3d7bff, #0a26c9); --tb-pad: clamp(80px, 10vw, 130px) 0 0; }
+.tbar .tbar-title { color: #fff; }
+.tbar .tbar-kicker { color: var(--blue-2); }

@@ -1,0 +1,101 @@
+/*
+  Thank-you page ("You're not done yet"), shared by every offer.
+  Each page themes it by setting these on body.ty:
+    --ty-bg, --ty-text, --ty-muted, --ty-card, --ty-card-2, --ty-border,
+    --ty-accent, --ty-accent-text, --ty-result, --ty-glow-c,
+    --ty-radius, --ty-badge-radius, --ty-btn-radius, --ty-head, --ty-h1-weight, --ty-h2-weight
+*/
+*, *::before, *::after { box-sizing: border-box; }
+body.ty {
+  margin: 0;
+  background: var(--ty-bg, #000);
+  color: var(--ty-text, #fff);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+.ty a { color: inherit; text-decoration: none; }
+.ty :focus-visible { outline: 2px solid var(--ty-result, #fff); outline-offset: 3px; }
+
+/* Top: nav + hero, themed backdrop set per page */
+.ty-top { position: relative; isolation: isolate; overflow: hidden; }
+.ty-top > canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
+.ty-nav { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: 1120px; margin: 0 auto; padding: 20px clamp(18px, 4vw, 40px); }
+.ty-brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; letter-spacing: -0.01em; }
+.ty-brand svg { width: 24px; height: 24px; }
+.ty-links { display: flex; align-items: center; gap: 22px; font-size: 14px; }
+.ty-links a:not(.ty-btn) { color: var(--ty-muted); transition: color 0.2s; }
+.ty-links a:not(.ty-btn):hover { color: var(--ty-text); }
+.ty a.ty-btn, .ty-btn { display: inline-flex; align-items: center; height: 38px; padding: 0 16px; border-radius: var(--ty-btn-radius, 8px); background: var(--ty-accent); color: var(--ty-accent-text); font-weight: 600; font-size: 13.5px; white-space: nowrap; }
+
+.ty-hero { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: clamp(44px, 8vw, 110px) 20px clamp(40px, 6vw, 72px); text-align: center; }
+.ty-pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--ty-card-2); border: 1px solid var(--ty-border); font-size: 13px; }
+.ty-pill i { width: 8px; height: 8px; border-radius: 50%; background: #35c27a; box-shadow: 0 0 0 4px rgba(53, 194, 122, 0.2); }
+.ty-hero h1 { margin: 20px 0 0; font-family: var(--ty-head, inherit); font-weight: var(--ty-h1-weight, 700); font-size: clamp(34px, 5.6vw, 68px); line-height: 1.04; letter-spacing: -0.035em; }
+.ty-hero h1 span { display: block; color: var(--ty-muted); }
+.ty-hero p { max-width: 50ch; margin: 18px auto 0; font-size: clamp(15px, 1.3vw, 17px); color: var(--ty-muted); }
+
+/* Steps */
+.ty-steps { display: grid; gap: clamp(20px, 3vw, 28px); max-width: 920px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 24px) clamp(64px, 8vw, 100px); }
+.ty-step { --step-pad: clamp(20px, 3.2vw, 30px); padding: var(--step-pad); border-radius: var(--ty-radius, 14px); background: var(--ty-card); border: 1px solid var(--ty-border); overflow: hidden; }
+.ty-step-head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.ty-badge { flex: none; padding: 5px 14px; border-radius: var(--ty-badge-radius, 999px); background: var(--ty-accent); color: var(--ty-accent-text); font-family: var(--ty-badge-font, inherit); font-weight: 700; font-size: 12.5px; letter-spacing: 0.06em; box-shadow: 0 0 24px -4px var(--ty-glow-c, var(--ty-accent)); }
+.ty-step h2 { margin: 0; font-family: var(--ty-head, inherit); font-weight: var(--ty-h2-weight, 700); font-size: clamp(22px, 2.8vw, 32px); line-height: 1.15; letter-spacing: -0.025em; }
+.ty-step > p { margin: 14px 0 24px; font-size: 16px; color: var(--ty-muted); }
+.ty-step > p b { color: var(--ty-text); }
+.ty-step > p.ty-note { margin: 20px 0 0; font-size: 14px; }
+.ty-note a { color: var(--ty-text); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Google Calendar invite mock (always light, like the real email) */
+.invite { position: relative; max-width: 660px; margin: 0 auto; border-radius: 12px; overflow: hidden; background: #fff; color: #1f1f1f; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 0, 0, 0.06); }
+.invite-subject { padding: 14px 20px; border-bottom: 1px solid #e3e3e3; font-size: clamp(15px, 2vw, 20px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.invite-card { margin: 16px; padding: 20px 22px; border-radius: 14px; background: #f0f4f9; }
+.invite-when { font-size: 15px; font-weight: 500; }
+.invite-title { margin: 4px 0 16px; font-size: clamp(22px, 3vw, 30px); line-height: 1.2; }
+.invite-row { display: flex; align-items: flex-start; gap: 16px; padding: 7px 0; font-size: 14.5px; color: #3c4043; }
+.invite-row svg { flex: none; width: 20px; height: 20px; fill: none; stroke: #5f6368; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.invite-row em { font-style: normal; color: #70757a; }
+.invite-row .gcal { stroke: none; }
+.invite-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.invite-actions span { position: relative; display: inline-flex; align-items: center; height: 40px; padding: 0 22px; border-radius: 999px; background: #0b57d0; color: #fff; font-weight: 500; font-size: 14.5px; }
+.invite-actions .light { background: #d3e3fd; color: #0b57d0; }
+.invite-actions .more { padding: 0 15px; }
+.circle { position: absolute; left: -18px; top: -15px; width: calc(100% + 36px); height: calc(100% + 30px); overflow: visible; pointer-events: none; }
+.circle path { fill: none; stroke: #e0312b; stroke-width: 2.6; stroke-linecap: round; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.1s cubic-bezier(0.6, 0.1, 0.3, 1) 0.35s; }
+.invite.drawn .circle path { stroke-dashoffset: 0; }
+
+/* Result cards */
+.ty-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 28px; }
+.tresult { display: flex; flex-direction: column; }
+.tresult-result { margin: 0; font-size: clamp(17px, 1.8vw, 20px); font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; color: var(--ty-result, var(--ty-accent)); }
+.tresult-who { margin: 4px 0 12px; font-size: 14px; font-weight: 500; color: var(--ty-muted); }
+.tresult-quote { flex: 1; margin: 0; padding: 18px 20px; border-radius: calc(var(--ty-radius, 14px) - 4px); background: var(--ty-card-2); border: 1px solid var(--ty-border); }
+.tresult-stars { display: block; margin-bottom: 8px; font-size: 12px; letter-spacing: 2px; color: var(--ty-result, var(--ty-accent)); }
+.tresult-quote p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ty-text); }
+
+/* The scrolling testimonial bar, bled to the step card's edges */
+.ty-step .tbar {
+  --tb-pad: 22px 0 4px;
+  --tb-card: var(--ty-card-2);
+  --tb-text: var(--ty-text);
+  --tb-muted: var(--ty-muted);
+  --tb-accent: var(--ty-result, var(--ty-accent));
+  --tb-border: var(--ty-border);
+  --tb-radius: calc(var(--ty-radius, 14px) - 4px);
+  --tb-av: var(--ty-accent);
+  --tb-av-text: var(--ty-accent-text);
+  margin: 0 calc(-1 * var(--step-pad));
+}
+
+.ty-foot { padding: 0 20px 40px; text-align: center; font-size: 13px; color: var(--ty-muted); }
+.ty-foot a { text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 700px) {
+  .ty-grid { grid-template-columns: 1fr; }
+  .ty-links a:not(.ty-btn) { display: none; }
+  .invite-card { margin: 10px; padding: 16px; }
+  .invite-actions span { height: 36px; padding: 0 16px; font-size: 13.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .circle path { transition: none; stroke-dashoffset: 0; }
+}
